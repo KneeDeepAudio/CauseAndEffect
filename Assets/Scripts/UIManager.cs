@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
     public Button launchButton;
     public float force = 45;
     public bool startRight;
+
+    public GameObject block;
+    public GameObject trampoline;
+    public GameObject Catapult;
+    public GameObject Balista;
 
     private float directionModifier;
     private GameObject startBlock;
@@ -28,6 +33,11 @@ public class UIManager : MonoBehaviour {
     {
         StartingBlock startingBlock = startBlock.GetComponent<StartingBlock>();
         launchButton.onClick.AddListener(delegate { startingBlock.rBody.AddTorque(force * directionModifier); } );
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
