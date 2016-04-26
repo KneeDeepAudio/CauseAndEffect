@@ -31,8 +31,8 @@ public class UIManager : MonoBehaviour {
 
     void Start()
     {
-        StartingBlock startingBlock = startBlock.GetComponent<StartingBlock>();
-        launchButton.onClick.AddListener(delegate { startingBlock.rBody.AddTorque(force * directionModifier); } );
+        StartingBlock startingBlock = startBlock.GetComponent<StartingBlock>();    
+        //launchButton.onClick.AddListener(delegate { startingBlock.rBody.AddTorque(force * directionModifier); } );
     }
 
     public void Restart()

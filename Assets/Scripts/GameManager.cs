@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
         if (hit.collider.tag == "ObjectPlacement")
         {
+            Debug.Log(hit.point.x + " " + hit.point.y);
             Vector3 position = new Vector3(hit.point.x, hit.point.y, 0f);
             Instantiate (currentObject, position, Quaternion.identity);
         }
@@ -97,6 +98,8 @@ public class GameManager : MonoBehaviour {
 
     public void Restart()
     {
+        GameEventManager.TriggerGameReset();
+        /*
         GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
         for (int i = 0; i < blocks.Length; i++)
         {
@@ -106,5 +109,27 @@ public class GameManager : MonoBehaviour {
         startingBlock.transform.rotation = startBlockStartRot;
         startingBlock.transform.position = startBlockStartPos;
         startingBlock.GetComponent<Rigidbody2D>().isKinematic = false;
+        */
     }
+
+    public void ClearAll()
+    {
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            Destroy(blocks[i]);
+        }
+
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
+        for (int i = 0; i < objects.Length; i++)
+        {
+            Destroy(objects[i]);
+        }
+    }
+
+    public void Launch()
+    {
+        GameEventManager.TriggerGameLaunch();
+    }
+
 }

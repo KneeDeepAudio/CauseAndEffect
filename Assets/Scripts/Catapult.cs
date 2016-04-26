@@ -7,11 +7,19 @@ public class Catapult : MonoBehaviour {
     public Vector2 ballForce;
     public bool hasFired = false;
 
+    private Vector3 ballPosition;
     private Rigidbody2D ballBody;
 
     void Awake()
     {
         ballBody = catapultBall.GetComponent<Rigidbody2D>();
+        ballPosition = catapultBall.transform.position;
+    }
+
+    void OnEnable()
+    {
+        GameEventManager.GameLaunch += GameLaunch;
+        GameEventManager.GameReset += GameReset;
     }
 
     public void LaunchBall()
@@ -20,6 +28,22 @@ public class Catapult : MonoBehaviour {
         ballBody.AddForce(ballForce);
     }
 
-    
+    public void GameLaunch()
+    {
+        hasFired = false;
+    }
+
+    public void GameReset()
+    {
+        ballBody.isKinematic = false;
+        catapultBall.transform.position = ballPosition;
+        ballBody.isKinematic = true;
+    }
+
+    void OnDisable()
+    {
+        GameEventManager.GameReset -= GameLaunch;
+        GameEventManager.GameReset -= GameReset;
+    }
 
 }
