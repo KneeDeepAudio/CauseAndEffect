@@ -19,7 +19,7 @@ public class EndButton : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.tag == "Block")
+        if (collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall")
         {
             winText.SetActive(true);
             continueButton.SetActive(true);
