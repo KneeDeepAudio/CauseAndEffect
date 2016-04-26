@@ -37,7 +37,12 @@ public class UIManager : MonoBehaviour {
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.instance.Restart();
+    }
+
+    public void Continue()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }

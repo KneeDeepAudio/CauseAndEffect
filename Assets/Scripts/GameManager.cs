@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour {
     private int placeableMask;
     private Ray ray;
     private RaycastHit rayHit;
+    private GameObject startingBlock;
+    private Vector3 startBlockStartPos;
+    private Quaternion startBlockStartRot;
 
     void Awake()
     {
@@ -36,11 +39,14 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         placeableMask = LayerMask.GetMask("Placeable");
+        startingBlock = GameObject.FindGameObjectWithTag("StartBlock");
     }
 
     void Start ()
     {
-        currentObject = block;   
+        currentObject = block;
+        startBlockStartPos = startingBlock.transform.position;
+        startBlockStartRot = startingBlock.transform.rotation;
 	}
 
     void Update ()
@@ -50,6 +56,11 @@ public class GameManager : MonoBehaviour {
             // place an object
             Debug.Log("Place Object Fire");
             PlaceObject();
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            RemoveObject();
         }
     }
 
@@ -67,8 +78,33 @@ public class GameManager : MonoBehaviour {
             
     }
 
+    void RemoveObject()
+    {
+        Debug.Log("Raycast Fire");
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        if (hit.collider.tag == "Block" || hit.collider.tag == "Object")
+        {
+            Destroy(hit.collider.gameObject);
+        }
+    }
+
     public void ChangeCurrentObject(GameObject newObject)
     {
         currentObject = newObject;
+    }
+
+    public void Restart()
+    {
+        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
+        for (int i = 0; i < blocks.Length; i++)
+        {
+            Destroy(blocks[i]);
+        }
+        startingBlock.GetComponent<Rigidbody2D>().isKinematic = true;
+        startingBlock.transform.rotation = startBlockStartRot;
+        startingBlock.transform.position = startBlockStartPos;
+        startingBlock.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 }
