@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 
     public float range = 100f;
 
+    private bool inPlay = false;
     private Button launchBotton;
     private GameObject currentObject;
     private int placeableMask;
@@ -48,16 +49,19 @@ public class GameManager : MonoBehaviour {
 
     void Update ()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (inPlay == false)
         {
-            // place an object
-            Debug.Log("Place Object Fire");
-            PlaceObject();
-        }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                // place an object
+                Debug.Log("Place Object Fire");
+                PlaceObject();
+            }
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-            RemoveObject();
+            if (Input.GetButtonDown("Fire2"))
+            {
+                RemoveObject();
+            }
         }
     }
 
@@ -95,18 +99,11 @@ public class GameManager : MonoBehaviour {
 
     public void Restart()
     {
-        GameEventManager.TriggerGameReset();
-        /*
-        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
-        for (int i = 0; i < blocks.Length; i++)
+        if (inPlay == true)
         {
-            Destroy(blocks[i]);
+            inPlay = false;
+            GameEventManager.TriggerGameReset();
         }
-        startingBlock.GetComponent<Rigidbody2D>().isKinematic = true;
-        startingBlock.transform.rotation = startBlockStartRot;
-        startingBlock.transform.position = startBlockStartPos;
-        startingBlock.GetComponent<Rigidbody2D>().isKinematic = false;
-        */
     }
 
     public void ClearAll()
@@ -126,7 +123,11 @@ public class GameManager : MonoBehaviour {
 
     public void Launch()
     {
-        GameEventManager.TriggerGameLaunch();
+        if (inPlay == false)
+        {
+            inPlay = true;
+            GameEventManager.TriggerGameLaunch();
+        }
     }
 
 }
