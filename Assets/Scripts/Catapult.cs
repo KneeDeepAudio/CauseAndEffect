@@ -9,10 +9,12 @@ public class Catapult : MonoBehaviour {
 
     private Vector3 ballPosition;
     private Rigidbody2D ballBody;
+    private AudioSource catapultLaunch;
 
     void Awake()
     {
         ballBody = catapultBall.GetComponent<Rigidbody2D>();
+        catapultLaunch = GetComponent<AudioSource>();
     }
 
     void OnEnable()
@@ -25,8 +27,10 @@ public class Catapult : MonoBehaviour {
     {
         if (hasFired == false)
         {
+            catapultLaunch.Play();
             ballBody.AddForce(ballForce);
             hasFired = true;
+            catapultBall.GetComponent<CatapultBall>().Travel();
         }
     }
 

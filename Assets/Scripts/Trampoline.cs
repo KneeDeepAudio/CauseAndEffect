@@ -9,12 +9,14 @@ public class Trampoline : MonoBehaviour {
 
     private BoxCollider2D col;
     private Rigidbody2D rBody;
+    private AudioSource trampContact;
 
 
     void Awake()
     {
         col = GetComponent<BoxCollider2D>();
         rBody = GetComponent<Rigidbody2D>();
+        trampContact = GetComponent<AudioSource>();
     }
 
     void GameLaunch()
@@ -39,5 +41,18 @@ public class Trampoline : MonoBehaviour {
     {
         GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
+    }
+
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        trampContact.Play();
+
+        /*
+        if (collider.gameObject.tag == "Block" && collided == false)
+        {
+            
+            collided = true;
+        }
+        */
     }
 }

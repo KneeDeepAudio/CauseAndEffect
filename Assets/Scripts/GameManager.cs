@@ -11,11 +11,7 @@ public class GameManager : MonoBehaviour {
     public float range = 100f;
 
     private bool inPlay = false;
-    private Button launchBotton;
     private GameObject currentObject;
-    private int placeableMask;
-    private Ray ray;
-    private RaycastHit rayHit;
     private GameObject startingBlock;
     private Vector3 startBlockStartPos;
     private Quaternion startBlockStartRot;
@@ -34,9 +30,8 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
 
-        placeableMask = LayerMask.GetMask("Placeable");
         startingBlock = GameObject.FindGameObjectWithTag("StartBlock");
     }
 

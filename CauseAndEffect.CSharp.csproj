@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Block.cs" />
     <Compile Include="Assets\Scripts\Catapult.cs" />
+    <Compile Include="Assets\Scripts\CatapultBall.cs" />
     <Compile Include="Assets\Scripts\CatapultTrigger.cs" />
     <Compile Include="Assets\Scripts\DragMe.cs" />
     <Compile Include="Assets\Scripts\DragPanel.cs" />
