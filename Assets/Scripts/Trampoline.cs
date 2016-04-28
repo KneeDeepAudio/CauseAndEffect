@@ -8,22 +8,25 @@ public class Trampoline : MonoBehaviour {
     public PhysicsMaterial2D flatMat;
 
     private BoxCollider2D col;
-
+    private Rigidbody2D rBody;
 
 
     void Awake()
     {
         col = GetComponent<BoxCollider2D>();
+        rBody = GetComponent<Rigidbody2D>();
     }
 
     void GameLaunch()
     {
         col.sharedMaterial = bounceMat;
+        rBody.constraints = RigidbodyConstraints2D.FreezeAll ;
     }
 
     void GameReset()
     {
         col.sharedMaterial = flatMat;
+        rBody.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
     }
 
     void OnEnable()

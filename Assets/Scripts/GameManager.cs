@@ -7,9 +7,6 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
 
     public GameObject block;
-    public GameObject trampoline;
-    public GameObject catapault;
-    public GameObject balista;
 
     public float range = 100f;
 

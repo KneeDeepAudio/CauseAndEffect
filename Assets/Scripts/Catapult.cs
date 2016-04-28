@@ -13,7 +13,6 @@ public class Catapult : MonoBehaviour {
     void Awake()
     {
         ballBody = catapultBall.GetComponent<Rigidbody2D>();
-        ballPosition = catapultBall.transform.position;
     }
 
     void OnEnable()
@@ -24,20 +23,24 @@ public class Catapult : MonoBehaviour {
 
     public void LaunchBall()
     {
-        hasFired = true;
-        ballBody.AddForce(ballForce);
+        if (hasFired == false)
+        {
+            ballBody.AddForce(ballForce);
+            hasFired = true;
+        }
     }
 
     public void GameLaunch()
     {
         hasFired = false;
+        ballPosition = catapultBall.transform.position;
     }
 
     public void GameReset()
     {
-        ballBody.isKinematic = false;
-        catapultBall.transform.position = ballPosition;
         ballBody.isKinematic = true;
+        catapultBall.transform.position = ballPosition;
+        ballBody.isKinematic = false;
     }
 
     void OnDisable()
