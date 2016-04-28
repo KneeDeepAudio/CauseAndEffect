@@ -12,6 +12,6 @@ public class CatapultTrigger : MonoBehaviour {
             Debug.Log("Ball Launched");
             catapult.LaunchBall();
         }
-    }x
+    }
 
 }
