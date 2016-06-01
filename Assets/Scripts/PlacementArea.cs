@@ -13,12 +13,14 @@ public class PlacementArea : MonoBehaviour {
     private int[] blocks;
     private SpriteRenderer sprite;
     private Color col;
+    private BoxCollider2D col2D;
 	
     // Use this for initialization
 	void Start () {
         sprite = GetComponent<SpriteRenderer>();
         col = sprite.color;
         blocks = new int[4];
+        col2D = GetComponent<BoxCollider2D>();
     }
 
     public bool IsFull
@@ -80,12 +82,14 @@ public class PlacementArea : MonoBehaviour {
         {
             full = true;
             sprite.enabled = false;
+            col2D.enabled = false;
         }
 
         else
         {
             full = false;
             sprite.enabled = true;
+            col2D.enabled = true;
         }
     }
 }
