@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
             }
 
             // If placing a Object check to see if anything else has been placed
-            if ((!areaPlaced.IsFull || areaPlaced.BlocksPlaced) && currentObject.tag == "Object")
+            if ((!areaPlaced.ObjectPlaced && !areaPlaced.BlocksPlaced) && currentObject.tag == "Object")
             {
                 // Place Block
                 Debug.Log(hit.point.x + " " + hit.point.y);
