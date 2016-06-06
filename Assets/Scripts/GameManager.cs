@@ -33,9 +33,8 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
 
-        placeableMask = LayerMask.GetMask("Placeable");
         startingBlock = GameObject.FindGameObjectWithTag("StartBlock");
 
         winMessage = GameObject.Find("Canvas").transform.Find("Win Message").gameObject;

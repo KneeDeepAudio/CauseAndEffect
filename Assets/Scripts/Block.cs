@@ -13,12 +13,17 @@ public class Block : MonoBehaviour {
     private Vector3 initialPosition;
     private Quaternion initialRotation;
     private Rigidbody2D body;
+
+    private bool collided = false;
+
     private int directionHit = 1;
 
     void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        blockContact = GetComponent<AudioSource>();
         this_blockAudio = GetComponent<AudioSource>();
+
     }
 
     public void OnCollisionEnter2D ( Collision2D other )
@@ -62,6 +67,7 @@ public class Block : MonoBehaviour {
         transform.rotation = initialRotation;
         transform.position = initialPosition;
         body.isKinematic = false;
+        collided = false;
     }
 
     void OnEnable()
@@ -78,5 +84,14 @@ public class Block : MonoBehaviour {
         
         Debug.Log("Calling disabledelegate");
         GameEventManager.GameReset -= GameReset;
+    }
+
+    void OnCollisionEnter2D(Collision2D collider)
+    {
+        if (collider.gameObject.tag == "Block" && collided == false)
+        {
+            blockContact.Play();
+            collided = true;
+        }
     }
 }
