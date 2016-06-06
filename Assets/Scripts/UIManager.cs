@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour {
 
     void Awake()
     {
+        gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         startBlock = GameObject.FindGameObjectWithTag("StartBlock");
         if (startRight == true)
         {
