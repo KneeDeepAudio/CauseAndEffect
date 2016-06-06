@@ -21,7 +21,7 @@ public class Block : MonoBehaviour {
     void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        blockContact = GetComponent<AudioSource>();
+       // blockContact = GetComponent<AudioSource>();
         this_blockAudio = GetComponent<AudioSource>();
 
     }
@@ -86,12 +86,5 @@ public class Block : MonoBehaviour {
         GameEventManager.GameReset -= GameReset;
     }
 
-    void OnCollisionEnter2D(Collision2D collider)
-    {
-        if (collider.gameObject.tag == "Block" && collided == false)
-        {
-            blockContact.Play();
-            collided = true;
-        }
-    }
+  
 }
