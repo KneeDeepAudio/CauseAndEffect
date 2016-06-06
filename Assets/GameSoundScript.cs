@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿using UnityEngine;
-=======
 using UnityEngine;
->>>>>>> master
 using System.Collections;
 
 public class GameSoundScript : MonoBehaviour {
