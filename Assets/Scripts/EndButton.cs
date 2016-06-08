@@ -2,21 +2,14 @@
 
 public class EndButton : MonoBehaviour {
 
-    private GameObject winText;
-    private GameObject continueButton;
+
     private AudioSource hitSound;
+    private UIManager guiManager;
 
     void Awake()
     {
-        winText = GameObject.FindGameObjectWithTag("Win Text");
-        continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
         hitSound = GetComponent<AudioSource>();
-    }
-
-    void Start()
-    {
-        winText.SetActive(false);
-        continueButton.SetActive(false);
+        guiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIManager>();
     }
 
     void OnCollisionEnter2D(Collision2D collider)
@@ -24,8 +17,7 @@ public class EndButton : MonoBehaviour {
         if (collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall")
         {
             hitSound.Play();
-            winText.SetActive(true);
-            continueButton.SetActive(true);
+            guiManager.LevelComplete();
         }
     }
 }

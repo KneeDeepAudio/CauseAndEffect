@@ -7,7 +7,7 @@ public class CatapultTrigger : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if ((collider.gameObject.tag == "Block" || collider.gameObject.tag == "StartBlock"))
+        if ((collider.gameObject.tag == "Block" || collider.gameObject.tag == "StartBlock") && GameManager.instance.inPlay)
         {
             Debug.Log("Ball Launched");
             catapult.LaunchBall();
