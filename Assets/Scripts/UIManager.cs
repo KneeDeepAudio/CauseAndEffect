@@ -5,35 +5,23 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
 
     public Button launchButton;
-    public float force = 45;
-    public bool startRight;
 
-    public GameObject block;
-    public GameObject trampoline;
-    public GameObject Catapult;
-    public GameObject Balista;
-
-    private float directionModifier;
-    private GameObject startBlock;
+    private GameObject winText;
+    private GameObject continueButton;
 
     void Awake()
     {
+        winText = GameObject.FindGameObjectWithTag("Win Text");
+        continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
+
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
-        startBlock = GameObject.FindGameObjectWithTag("StartBlock");
-        if (startRight == true)
-        {
-            directionModifier = -1;
-        }
-        else
-        {
-            directionModifier = 1;
-        }
+
     }
 
     void Start()
     {
-        StartingBlock startingBlock = startBlock.GetComponent<StartingBlock>();    
-        //launchButton.onClick.AddListener(delegate { startingBlock.rBody.AddTorque(force * directionModifier); } );
+        winText.SetActive(false);
+        continueButton.SetActive(false);
     }
 
     public void Restart()
@@ -41,9 +29,40 @@ public class UIManager : MonoBehaviour {
         GameManager.instance.Restart();
     }
 
+    public void LevelComplete()
+    {
+        winText.SetActive(true);
+        continueButton.SetActive(true);
+    }
+
     public void Continue()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    void GameReset()
+    {
+        launchButton.onClick.RemoveAllListeners();
+        launchButton.onClick.AddListener(delegate { GameManager.instance.Launch(); });
+        launchButton.GetComponentInChildren<Text>().text = "Play";
+    }
+
+    void GameLaunch()
+    {
+        launchButton.onClick.RemoveAllListeners();
+        launchButton.onClick.AddListener(delegate { GameManager.instance.Restart(); } );
+        launchButton.GetComponentInChildren<Text>().text = "Reset";
+    }
+
+    void OnEnable()
+    {
+        GameEventManager.GameLaunch += GameLaunch;
+        GameEventManager.GameReset += GameReset;
+    }
+
+    void OnDisable()
+    {
+        GameEventManager.GameLaunch -= GameLaunch;
+        GameEventManager.GameReset -= GameReset;
+    }
 }

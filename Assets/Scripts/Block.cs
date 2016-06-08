@@ -47,7 +47,7 @@ public class Block : MonoBehaviour {
             this_blockAudio.clip = blockContact[blockContacti];
             this_blockAudio.Play();
             }
-            body.AddTorque(25 * directionHit);
+
         hitOnce = true;
         }
 

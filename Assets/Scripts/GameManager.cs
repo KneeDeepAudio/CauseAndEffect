@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager instance = null;
 
     public GameObject block;
-    GameObject winMessage, continueButton;
-    float checkSpace = 0.5f;        ///Check area for placing objects
     public float range = 100f;
-
     public bool inPlay = false;
-    private int placedObjects = 0;
-    private GameObject currentObject, launchBotton;
+    public float maxObjectDistance = 0.5f;
+
+    private GameObject currentObject;
     private int placeableMask;
     private Ray ray;
     private RaycastHit rayHit;
@@ -21,14 +18,17 @@ public class GameManager : MonoBehaviour {
     private Vector3 startBlockStartPos;
     private Quaternion startBlockStartRot;
 
+
     void Awake()
     {
         if (instance == null)
+
             //if not, set instance to this
             instance = this;
 
         //If instance already exists and it's not this:
         else if (instance != this)
+
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
 
@@ -36,92 +36,119 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(this);
 
         startingBlock = GameObject.FindGameObjectWithTag("StartBlock");
+    }
 
-        winMessage = GameObject.Find("Canvas").transform.Find("Win Message").gameObject;
-        continueButton = GameObject.Find("Canvas").transform.Find("ContinueButton").gameObject;
-        }
-
-    void Start ()
+    void Start()
     {
-        launchBotton = GameObject.Find("Canvas").transform.Find("Launch Button").gameObject;
         currentObject = block;
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
-        winMessage.SetActive(false);
-        continueButton.SetActive(false);
-	}
+    }
 
-    void Update ()
+    void Update()
     {
-        if (!inPlay)
-            {
+        if (inPlay == false)
+        {
             if (Input.GetButtonDown("Fire1"))
-                {
+            {
                 // place an object
                 Debug.Log("Place Object Fire");
                 PlaceObject();
-                }
+            }
 
             if (Input.GetButtonDown("Fire2"))
-                {
+            {
                 RemoveObject();
-                }
             }
-        
         }
+    }
 
     void PlaceObject()
     {
-
-        checkSpace = currentObject.tag == "Object" ? 1f : 0.5f;
+        // First Shoot a ray
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-        ///When there is nothin in the area that I clicked
+        // If nothing is hit, stop doing things
         if (!hit)
             return;
 
-        ///If there is any other object in the area, I do not place anything
-        Collider2D[] hits =  Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition),checkSpace);
-        foreach (Collider2D i in hits)
+        // Check if player is placing object in the right area
+        if (hit.collider.tag == "ObjectPlacement")
+        {
+
+            ///If there is any other object in the area, place nothing
+            Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), maxObjectDistance);
+            foreach (Collider2D i in hits)
             {
-            if (i.gameObject.tag == "Block" || i.gameObject.tag == "Object" || i.gameObject.tag == "StartBlock")
-                return;
+                if (i.gameObject.tag == "Block" || i.gameObject.tag == "Object" || i.gameObject.tag == "StartBlock")
+                    return;
             }
 
-        Debug.Log("Raycast hit: " + hit.collider.gameObject.tag);
-        if (hit.collider.tag == "ObjectPlacement" && placedObjects < 20)
-        {
-            Debug.Log(hit.point.x + " " + hit.point.y);
-            Vector3 position = new Vector3(hit.point.x, hit.point.y, 0f);
-            Instantiate (currentObject, position, Quaternion.identity);
-            placedObjects++;
+
+            PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
+            // If placing a block check to see if full
+            if (!areaPlaced.IsFull && currentObject.tag == "Block")
+            {
+                // Place Block
+                Debug.Log(hit.point.x + " " + hit.point.y);
+                Vector3 position = new Vector3(hit.point.x, hit.point.y, 0f);
+                GameObject placedObject = Instantiate(currentObject, position, Quaternion.identity) as GameObject;
+
+                // Assign Object to area
+                PlaceableObject obj = placedObject.GetComponent<PlaceableObject>();
+                obj.areaPlaced = areaPlaced;
+
+                // Update objects placed in area
+                areaPlaced.PlaceBlock();
+                Debug.Log("Placed Block");
+            }
+
+            // If placing a Object check to see if anything else has been placed
+            if ((!areaPlaced.ObjectPlaced && !areaPlaced.BlocksPlaced) && currentObject.tag == "Object")
+            {
+                // Place Block
+                Debug.Log(hit.point.x + " " + hit.point.y);
+                Vector3 position = new Vector3(hit.point.x, hit.point.y, 0f);
+                GameObject placedObject = Instantiate(currentObject, position, Quaternion.identity) as GameObject;
+
+                // Assign Object to area
+                PlaceableObject obj = placedObject.GetComponent<PlaceableObject>();
+                obj.areaPlaced = areaPlaced;
+
+                // Update objects placed in area
+                areaPlaced.PlaceObject();
+                Debug.Log("Placed Object");
+            }
         }
-            
     }
 
     void RemoveObject()
     {
         Debug.Log("Raycast Fire");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition),0.2f);
-        ///When there is nothin in the area that I clicked
-        if (!hit || hits.Length==0)
+        // If nothing is hit, stop doing things
+        if (!hit)
             return;
 
-        Debug.Log("Raycast hit: " + hit.collider.gameObject.tag);
-        foreach (Collider2D i in hits)
-            {
-            if (i.gameObject.tag == "Block" || i.gameObject.tag == "Object" || i.gameObject.tag == "StartBlock")
-                {
-                placedObjects--;
-                Destroy(i.gameObject);
-                }
-            }
+        PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+        PlacementArea areaPlaced = placedObject.areaPlaced;
+
+        if (hit.collider.tag == "Block")
+        {
+            areaPlaced.RemoveBlock();
+            Destroy(hit.collider.gameObject);
+            Debug.Log(areaPlaced);
+        }
+
+        else if (hit.collider.tag == "Object")
+        {
+            //PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
+            areaPlaced.RemoveObject();
+            Destroy(hit.collider.gameObject);
+        }
     }
 
     public void ChangeCurrentObject(GameObject newObject)
@@ -151,27 +178,15 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(objects[i]);
         }
-        placedObjects = 0;
-        inPlay = true;
-        Launch();
     }
 
     public void Launch()
     {
-        if (!inPlay)    //Switch to playing mode
-            {
+        if (!inPlay)
+        {
             inPlay = true;
-            launchBotton.GetComponentInChildren<Text>().text = "Playing";
             GameEventManager.TriggerGameLaunch();
-            }
-        else if (inPlay)
-            {
-            winMessage.SetActive(false);
-            continueButton.SetActive(false);
-            inPlay = false;
-            launchBotton.GetComponentInChildren<Text>().text = "Building";
-            GameEventManager.TriggerGameReset();
-            }
+        }
     }
 
 }
