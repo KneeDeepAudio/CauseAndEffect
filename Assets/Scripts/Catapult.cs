@@ -19,6 +19,7 @@ public class Catapult : MonoBehaviour {
 
     void OnEnable()
     {
+        ballPosition = catapultBall.transform.position;
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
     }
@@ -37,7 +38,7 @@ public class Catapult : MonoBehaviour {
     public void GameLaunch()
     {
         hasFired = false;
-        ballPosition = catapultBall.transform.position;
+        
     }
 
     public void GameReset()
