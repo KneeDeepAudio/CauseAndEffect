@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameSoundScript : MonoBehaviour {
@@ -26,6 +27,14 @@ public class GameSoundScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void OnLevelWasLoaded ( int level )
+        {
+
+        if (SceneManager.GetActiveScene().buildIndex > 2)
+            playInGameTrack();
+
+        }
 
     public void playTitleTrack ()
         {

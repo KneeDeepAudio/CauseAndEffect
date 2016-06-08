@@ -77,7 +77,7 @@ public class MovingPlatfrm : MonoBehaviour
 
 	void OnDrawGizmos ()
 	{
-		Gizmos.color = Color.green;
+		Gizmos.color = Color.blue;
 		Gizmos.DrawWireCube (positions[0].position, platform.localScale*gizmoSize);
 
 		Gizmos.color = Color.yellow;

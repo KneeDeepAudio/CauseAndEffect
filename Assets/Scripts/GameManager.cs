@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject block;
     GameObject winMessage, continueButton;
-
+    float checkSpace = 0.5f;        ///Check area for placing objects
     public float range = 100f;
 
     public bool inPlay = false;
@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour {
 
     void PlaceObject()
     {
-      
+
+        checkSpace = currentObject.tag == "Object" ? 1f : 0.5f;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour {
             return;
 
         ///If there is any other object in the area, I do not place anything
-        Collider2D[] hits =  Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition),0.5f);
+        Collider2D[] hits =  Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition),checkSpace);
         foreach (Collider2D i in hits)
             {
             if (i.gameObject.tag == "Block" || i.gameObject.tag == "Object" || i.gameObject.tag == "StartBlock")
@@ -106,16 +107,21 @@ public class GameManager : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition),0.2f);
         ///When there is nothin in the area that I clicked
-        if (!hit)
+        if (!hit || hits.Length==0)
             return;
 
         Debug.Log("Raycast hit: " + hit.collider.gameObject.tag);
-        if (hit.collider.tag == "Block" || hit.collider.tag == "Object" || hit.collider.tag == "StartBlock")
-        {
-            placedObjects--;
-            Destroy(hit.collider.gameObject);
-        }
+        foreach (Collider2D i in hits)
+            {
+            if (i.gameObject.tag == "Block" || i.gameObject.tag == "Object" || i.gameObject.tag == "StartBlock")
+                {
+                placedObjects--;
+                Destroy(i.gameObject);
+                }
+            }
     }
 
     public void ChangeCurrentObject(GameObject newObject)
