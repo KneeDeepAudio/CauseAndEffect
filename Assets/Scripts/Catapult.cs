@@ -9,14 +9,17 @@ public class Catapult : MonoBehaviour {
 
     private Vector3 ballPosition;
     private Rigidbody2D ballBody;
+    private AudioSource catapultLaunch;
 
     void Awake()
     {
         ballBody = catapultBall.GetComponent<Rigidbody2D>();
+        catapultLaunch = GetComponent<AudioSource>();
     }
 
     void OnEnable()
     {
+        ballPosition = catapultBall.transform.position;
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
     }
@@ -25,15 +28,17 @@ public class Catapult : MonoBehaviour {
     {
         if (hasFired == false)
         {
+            catapultLaunch.Play();
             ballBody.AddForce(ballForce);
             hasFired = true;
+            catapultBall.GetComponent<CatapultBall>().Travel();
         }
     }
 
     public void GameLaunch()
     {
         hasFired = false;
-        ballPosition = catapultBall.transform.position;
+        
     }
 
     public void GameReset()
