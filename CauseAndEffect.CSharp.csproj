@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameSoundScript.cs" />
     <Compile Include="Assets\Scripts\Block.cs" />
     <Compile Include="Assets\Scripts\Catapult.cs" />
     <Compile Include="Assets\Scripts\CatapultBall.cs" />
@@ -89,11 +90,13 @@
     <Compile Include="Assets\Scripts\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LevelSelectUI.cs" />
+    <Compile Include="Assets\Scripts\MovingPlatfrm.cs" />
     <Compile Include="Assets\Scripts\PlaceableObject.cs" />
     <Compile Include="Assets\Scripts\PlacementArea.cs" />
     <Compile Include="Assets\Scripts\StartingBlock.cs" />
     <Compile Include="Assets\Scripts\Trampoline.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
+    <Compile Include="Assets\SoundScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Textures and Sprites\SF UI\Background\LICENSE.txt" />

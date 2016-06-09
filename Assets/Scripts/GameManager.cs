@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public static GameManager instance = null;
 
     public GameObject block;
-
     public float range = 100f;
+    public bool inPlay = false;
+    public float maxObjectDistance = 0.5f;
 
-    private bool inPlay = false;
     private GameObject currentObject;
+    private int placeableMask;
+    private Ray ray;
+    private RaycastHit rayHit;
     private GameObject startingBlock;
     private Vector3 startBlockStartPos;
     private Quaternion startBlockStartRot;
+
 
     void Awake()
     {
@@ -35,14 +38,14 @@ public class GameManager : MonoBehaviour {
         startingBlock = GameObject.FindGameObjectWithTag("StartBlock");
     }
 
-    void Start ()
+    void Start()
     {
         currentObject = block;
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
-	}
+    }
 
-    void Update ()
+    void Update()
     {
         if (inPlay == false)
         {
@@ -63,15 +66,27 @@ public class GameManager : MonoBehaviour {
     void PlaceObject()
     {
         // First Shoot a ray
-        Debug.Log("Raycast Fire");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+        // If nothing is hit, stop doing things
+        if (!hit)
+            return;
 
         // Check if player is placing object in the right area
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
         if (hit.collider.tag == "ObjectPlacement")
         {
-            PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
 
+            ///If there is any other object in the area, place nothing
+            Collider2D[] hits = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), maxObjectDistance);
+            foreach (Collider2D i in hits)
+            {
+                if (i.gameObject.tag == "Block" || i.gameObject.tag == "Object" || i.gameObject.tag == "StartBlock")
+                    return;
+            }
+
+
+            PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
             // If placing a block check to see if full
             if (!areaPlaced.IsFull && currentObject.tag == "Block")
             {
@@ -112,15 +127,19 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("Raycast Fire");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+        // If nothing is hit, stop doing things
+        if (!hit)
+            return;
+
         PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
         PlacementArea areaPlaced = placedObject.areaPlaced;
 
-        if (hit.collider.tag == "Block" )
+        if (hit.collider.tag == "Block")
         {
             areaPlaced.RemoveBlock();
-            Destroy(hit.collider.gameObject);            
+            Destroy(hit.collider.gameObject);
             Debug.Log(areaPlaced);
         }
 
@@ -139,7 +158,7 @@ public class GameManager : MonoBehaviour {
 
     public void Restart()
     {
-        if (inPlay == true)
+        if (inPlay)
         {
             inPlay = false;
             GameEventManager.TriggerGameReset();
@@ -163,7 +182,7 @@ public class GameManager : MonoBehaviour {
 
     public void Launch()
     {
-        if (inPlay == false)
+        if (!inPlay)
         {
             inPlay = true;
             GameEventManager.TriggerGameLaunch();

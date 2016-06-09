@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlacementArea : MonoBehaviour {
+public class PlacementArea : MonoBehaviour
+{
 
     public bool objectPlaced = false;
     public bool blockPlaced = false;
@@ -14,9 +15,10 @@ public class PlacementArea : MonoBehaviour {
     private SpriteRenderer sprite;
     private Color col;
     private BoxCollider2D col2D;
-	
+
     // Use this for initialization
-	void Start () {
+    void Start()
+    {
         sprite = GetComponent<SpriteRenderer>();
         col = sprite.color;
         blocks = new int[4];
