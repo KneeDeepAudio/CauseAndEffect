@@ -31,8 +31,8 @@ public class BallistaArrow : MonoBehaviour {
         Vector3 pos = this.gameObject.transform.position;
         Vector3 otherPos = other.gameObject.transform.position;
 
-        Vector3 horizFwd;
-        Vector3 vertiFwd;
+       // Vector3 horizFwd;
+       // Vector3 vertiFwd;
 
         if(other.gameObject.tag == "Block" || other.gameObject.tag == "EndBlock" || other.gameObject.tag == "Object")
         {
