@@ -18,6 +18,12 @@ public class UIManager : MonoBehaviour {
 
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene("LevelSelect");
+    }
+
     void Start()
     {
         winText.SetActive(false);
@@ -65,4 +71,14 @@ public class UIManager : MonoBehaviour {
         GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
     }
+
+	public void Pause()
+	{
+		if (Time.timeScale == 1)
+			Time.timeScale = 0;
+		else if (Time.timeScale == 0)
+			Time.timeScale = 1;
+	}
+
+
 }
