@@ -1,0 +1,343 @@
+fileFormatVersion: 2
+guid: 63db60c7674fc24458afcae1038b5bc7
+timeCreated: 1465685490
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ballistapixelspreadsheet_0
+    21300002: ballistapixelspreadsheet_1
+    21300004: ballistapixelspreadsheet_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: ballistapixelspreadsheet_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 6
+        width: 203
+        height: 146
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 203, y: 71}
+        - {x: 190, y: 146}
+        - {x: 158, y: 146}
+        - {x: 158, y: 144}
+        - {x: 160, y: 141}
+        - {x: 120, y: 134}
+        - {x: 111, y: 124}
+        - {x: 114, y: 120}
+        - {x: 120, y: 116}
+        - {x: 106, y: 116}
+        - {x: 102, y: 113}
+        - {x: 99, y: 118}
+        - {x: 90, y: 129}
+        - {x: 10, y: 65}
+        - {x: 0, y: 31}
+        - {x: 0, y: 4}
+        - {x: 16, y: 0}
+        - {x: 203, y: 0}
+      - - {x: 91, y: 34}
+        - {x: 92, y: 31}
+        - {x: 95, y: 31}
+        - {x: 97, y: 33}
+        - {x: 96, y: 36}
+        - {x: 93, y: 36}
+      - - {x: 112, y: 38}
+        - {x: 111, y: 34}
+        - {x: 113, y: 32}
+        - {x: 115, y: 32}
+        - {x: 117, y: 34}
+        - {x: 117, y: 37}
+        - {x: 115, y: 39}
+      - - {x: 21, y: 48}
+        - {x: 24, y: 49}
+        - {x: 24, y: 52}
+        - {x: 21, y: 53}
+        - {x: 19, y: 51}
+      - - {x: 15, y: 56}
+        - {x: 13, y: 54}
+        - {x: 13, y: 50}
+        - {x: 19, y: 50}
+        - {x: 19, y: 55}
+        - {x: 17, y: 56}
+      - - {x: 0, y: 61}
+        - {x: 0, y: 55}
+        - {x: 3, y: 54}
+        - {x: 10, y: 54}
+        - {x: 10, y: 57}
+        - {x: 8, y: 61}
+      - - {x: 103, y: 65}
+        - {x: 105, y: 63}
+        - {x: 108, y: 64}
+        - {x: 108, y: 67}
+        - {x: 106, y: 69}
+        - {x: 103, y: 68}
+      - - {x: 3, y: 71}
+        - {x: 2, y: 69}
+        - {x: 2, y: 66}
+        - {x: 4, y: 65}
+        - {x: 7, y: 65}
+        - {x: 8, y: 67}
+        - {x: 8, y: 70}
+        - {x: 6, y: 71}
+      - - {x: 89, y: 93}
+        - {x: 92, y: 94}
+        - {x: 92, y: 97}
+        - {x: 89, y: 98}
+        - {x: 87, y: 96}
+      - - {x: 100, y: 111}
+        - {x: 100, y: 106}
+        - {x: 103, y: 102}
+        - {x: 105, y: 102}
+        - {x: 107, y: 104}
+        - {x: 106, y: 109}
+        - {x: 103, y: 112}
+      - - {x: 198, y: 106}
+        - {x: 201, y: 104}
+        - {x: 203, y: 105}
+        - {x: 203, y: 114}
+        - {x: 198, y: 114}
+      - - {x: 110, y: 118}
+        - {x: 113, y: 119}
+        - {x: 113, y: 122}
+        - {x: 110, y: 123}
+        - {x: 108, y: 121}
+      - - {x: 99, y: 124}
+        - {x: 101, y: 122}
+        - {x: 104, y: 123}
+        - {x: 105, y: 128}
+        - {x: 102, y: 130}
+        - {x: 99, y: 127}
+    - name: ballistapixelspreadsheet_1
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 6
+        width: 204
+        height: 139
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 200, y: 4}
+        - {x: 203, y: 5}
+        - {x: 204, y: 7}
+        - {x: 204, y: 55}
+        - {x: 184, y: 130}
+        - {x: 169, y: 139}
+        - {x: 137, y: 139}
+        - {x: 120, y: 134}
+        - {x: 110, y: 123}
+        - {x: 103, y: 113}
+        - {x: 104, y: 103}
+        - {x: 83, y: 91}
+        - {x: 78, y: 85}
+        - {x: 76, y: 75}
+        - {x: 67, y: 68}
+        - {x: 65, y: 69}
+        - {x: 54, y: 66}
+        - {x: 61, y: 76}
+        - {x: 67, y: 69}
+        - {x: 70, y: 70}
+        - {x: 72, y: 73}
+        - {x: 78, y: 89}
+        - {x: 101, y: 104}
+        - {x: 103, y: 116}
+        - {x: 118, y: 139}
+        - {x: 108, y: 139}
+        - {x: 0, y: 98}
+        - {x: 0, y: 7}
+        - {x: 16, y: 0}
+        - {x: 204, y: 0}
+        - {x: 204, y: 1}
+        - {x: 203, y: 4}
+      - - {x: 93, y: 32}
+        - {x: 95, y: 30}
+        - {x: 98, y: 31}
+        - {x: 98, y: 34}
+        - {x: 96, y: 36}
+        - {x: 93, y: 35}
+      - - {x: 112, y: 34}
+        - {x: 113, y: 32}
+        - {x: 116, y: 32}
+        - {x: 118, y: 33}
+        - {x: 118, y: 36}
+        - {x: 115, y: 39}
+        - {x: 112, y: 38}
+      - - {x: 21, y: 48}
+        - {x: 24, y: 49}
+        - {x: 24, y: 52}
+        - {x: 21, y: 53}
+        - {x: 19, y: 51}
+      - - {x: 0, y: 61}
+        - {x: 0, y: 54}
+        - {x: 2, y: 52}
+        - {x: 11, y: 52}
+        - {x: 12, y: 53}
+        - {x: 12, y: 57}
+        - {x: 9, y: 61}
+      - - {x: 103, y: 68}
+        - {x: 103, y: 63}
+        - {x: 108, y: 63}
+        - {x: 109, y: 64}
+        - {x: 109, y: 67}
+        - {x: 107, y: 69}
+        - {x: 105, y: 69}
+      - - {x: 3, y: 71}
+        - {x: 2, y: 68}
+        - {x: 5, y: 65}
+        - {x: 8, y: 65}
+        - {x: 9, y: 67}
+        - {x: 9, y: 69}
+        - {x: 6, y: 71}
+      - - {x: 24, y: 68}
+        - {x: 25, y: 65}
+        - {x: 28, y: 65}
+        - {x: 30, y: 67}
+        - {x: 29, y: 70}
+        - {x: 26, y: 70}
+      - - {x: 16, y: 75}
+        - {x: 15, y: 72}
+        - {x: 17, y: 67}
+        - {x: 24, y: 67}
+        - {x: 24, y: 72}
+        - {x: 20, y: 75}
+      - - {x: 5, y: 75}
+        - {x: 6, y: 72}
+        - {x: 9, y: 72}
+        - {x: 11, y: 74}
+        - {x: 10, y: 77}
+        - {x: 7, y: 77}
+      - - {x: 0, y: 87}
+        - {x: 0, y: 75}
+        - {x: 5, y: 75}
+        - {x: 6, y: 77}
+        - {x: 6, y: 86}
+        - {x: 4, y: 87}
+      - - {x: 7, y: 87}
+        - {x: 7, y: 84}
+        - {x: 14, y: 76}
+        - {x: 19, y: 76}
+        - {x: 20, y: 78}
+        - {x: 20, y: 85}
+        - {x: 15, y: 87}
+      - - {x: 159, y: 76}
+        - {x: 164, y: 78}
+        - {x: 164, y: 81}
+        - {x: 161, y: 82}
+        - {x: 157, y: 79}
+      - - {x: 169, y: 79}
+        - {x: 172, y: 80}
+        - {x: 172, y: 83}
+        - {x: 169, y: 84}
+        - {x: 167, y: 82}
+      - - {x: 35, y: 90}
+        - {x: 35, y: 89}
+        - {x: 38, y: 86}
+        - {x: 41, y: 87}
+        - {x: 42, y: 91}
+        - {x: 40, y: 93}
+        - {x: 38, y: 93}
+      - - {x: 87, y: 96}
+        - {x: 88, y: 93}
+        - {x: 91, y: 93}
+        - {x: 93, y: 95}
+        - {x: 92, y: 98}
+        - {x: 89, y: 98}
+      - - {x: 56, y: 117}
+        - {x: 54, y: 113}
+        - {x: 54, y: 107}
+        - {x: 59, y: 102}
+        - {x: 62, y: 102}
+        - {x: 62, y: 114}
+        - {x: 61, y: 117}
+      - - {x: 100, y: 111}
+        - {x: 100, y: 103}
+        - {x: 103, y: 102}
+        - {x: 105, y: 102}
+        - {x: 107, y: 104}
+        - {x: 106, y: 109}
+        - {x: 103, y: 112}
+      - - {x: 110, y: 118}
+        - {x: 113, y: 119}
+        - {x: 113, y: 122}
+        - {x: 110, y: 123}
+        - {x: 108, y: 121}
+      - - {x: 99, y: 124}
+        - {x: 101, y: 122}
+        - {x: 104, y: 123}
+        - {x: 105, y: 128}
+        - {x: 103, y: 130}
+        - {x: 100, y: 129}
+    - name: ballistapixelspreadsheet_2
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 91
+        width: 60
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 30, y: 9.5}
+        - {x: 30, y: 23.5}
+        - {x: 8, y: 23.5}
+        - {x: -30, y: -9.5}
+        - {x: -30, y: -22.5}
+        - {x: -29, y: -23.5}
+        - {x: -22, y: -23.5}
+        - {x: -20, y: -22.5}
+        - {x: 6, y: -2.5}
+        - {x: 29, y: 4.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
