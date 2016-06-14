@@ -5,7 +5,7 @@ public class Catapult : MonoBehaviour {
 
     public GameObject catapultBall;
     SpriteRenderer catapultImage;
-    public Sprite[] catapultAnimation;
+    public Sprite[] catapultAnimation = new Sprite[3];
     public Vector2 ballForce;
     public bool hasFired = false;
     int direction = 1; //1 = facing right, -1 = facing left
@@ -24,7 +24,16 @@ public class Catapult : MonoBehaviour {
 
     void OnEnable()
     {
-        catapultImage.sprite = catapultAnimation[0];
+
+        try
+            {
+
+            while (catapultImage.sprite != catapultAnimation[0])
+                catapultImage.sprite = catapultAnimation[0];
+            }
+        catch (System.Exception e)
+            {
+            }
         ballPosition = catapultBall.transform.position;
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
@@ -72,7 +81,15 @@ public class Catapult : MonoBehaviour {
 
     public void GameReset()
     {
-        catapultImage.sprite = catapultAnimation[0];
+        try
+            {
+
+            while (catapultImage.sprite != catapultAnimation[0])
+                catapultImage.sprite = catapultAnimation[0];
+            }
+        catch (System.Exception e)
+            {
+            }
         ballBody.isKinematic = true;
         catapultBall.transform.position = ballPosition;
         ballBody.isKinematic = false;

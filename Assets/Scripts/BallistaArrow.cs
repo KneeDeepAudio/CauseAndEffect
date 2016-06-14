@@ -11,7 +11,10 @@ public class BallistaArrow : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	    if (active)
+        if (!GameManager.instance.inPlay)
+            return;
+
+        if (active)
         {
             this.transform.position = new Vector3(transform.position.x + (xUpdate * Time.deltaTime), transform.position.y + (yUpdate * Time.deltaTime));
             this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
@@ -28,6 +31,10 @@ public class BallistaArrow : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
+
+        if (!GameManager.instance.inPlay)
+            return;
+
         Vector3 pos = this.gameObject.transform.position;
         Vector3 otherPos = other.gameObject.transform.position;
 

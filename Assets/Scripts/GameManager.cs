@@ -130,11 +130,12 @@ public class GameManager : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
         // If nothing is hit, stop doing things
-        if (!hit)
+        if (!hit || !hit.collider.gameObject.GetComponent<PlaceableObject>())
             return;
 
         PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
         PlacementArea areaPlaced = placedObject.areaPlaced;
+
 
         if (hit.collider.tag == "Block")
         {
