@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -167,17 +168,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearAll()
     {
-        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
-        for (int i = 0; i < blocks.Length; i++)
-        {
-            Destroy(blocks[i]);
-        }
-
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
-        for (int i = 0; i < objects.Length; i++)
-        {
-            Destroy(objects[i]);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Launch()
