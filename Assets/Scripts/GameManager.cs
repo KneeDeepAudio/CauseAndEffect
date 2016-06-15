@@ -128,27 +128,29 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Raycast Fire");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
 
-        // If nothing is hit, stop doing things
-        if (!hit)
-            return;
-
-        PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
-        PlacementArea areaPlaced = placedObject.areaPlaced;
-
-        if (hit.collider.tag == "Block")
+        foreach (RaycastHit2D hit in hits)
         {
-            areaPlaced.RemoveBlock();
-            Destroy(hit.collider.gameObject);
-            Debug.Log(areaPlaced);
-        }
+            if (hit.collider.tag == "Block")
+            {
+                PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+                PlacementArea areaPlaced = placedObject.areaPlaced;
 
-        else if (hit.collider.tag == "Object")
-        {
-            //PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
-            areaPlaced.RemoveObject();
-            Destroy(hit.collider.gameObject);
+                areaPlaced.RemoveBlock();
+                Destroy(hit.collider.gameObject);
+                Debug.Log(areaPlaced);
+            }
+
+            else if (hit.collider.tag == "Object")
+            {
+                PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+                PlacementArea areaPlaced = placedObject.areaPlaced;
+
+                //PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
+                areaPlaced.RemoveObject();
+                Destroy(hit.collider.gameObject);
+            }
         }
     }
 
