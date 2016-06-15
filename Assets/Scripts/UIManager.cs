@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 
     private GameObject winText;
     private GameObject continueButton;
+    public GameObject pausePanel;
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class UIManager : MonoBehaviour {
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene("LevelSelect");
+            Pause();
     }
 
     void Start()
@@ -32,7 +33,9 @@ public class UIManager : MonoBehaviour {
 
     public void Restart()
     {
-        GameManager.instance.Restart();
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //GameManager.instance.Restart();
     }
 
     public void LevelComplete()
@@ -72,13 +75,30 @@ public class UIManager : MonoBehaviour {
         GameEventManager.GameReset -= GameReset;
     }
 
-	public void Pause()
-	{
-		if (Time.timeScale == 1)
-			Time.timeScale = 0;
-		else if (Time.timeScale == 0)
-			Time.timeScale = 1;
-	}
+    public void Pause ()
+        {
+        if (Time.timeScale == 1)
+            {
+            Time.timeScale = 0;
+            pausePanel.SetActive(true);
+            }
+        else if (Time.timeScale == 0)
+            {
+            Time.timeScale = 1;
+            pausePanel.SetActive(false);
+            }
+        }
 
+    public void LevelSelectUI ()
+        {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("LevelSelect");
+        }
 
-}
+    public void MainMenuUI ()
+        {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("StartScene");
+        }
+
+    }
