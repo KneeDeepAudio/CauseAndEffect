@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -123,34 +124,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void RemoveObject()
-    {
+    void RemoveObject ()
+        {
         Debug.Log("Raycast Fire");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin,ray.direction);
 
-        // If nothing is hit, stop doing things
-        if (!hit || !hit.collider.gameObject.GetComponent<PlaceableObject>())
-            return;
+        foreach (RaycastHit2D hit in hits)
+            {
+            if (hit.collider.tag == "Block")
+                {
+                PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+                PlacementArea areaPlaced = placedObject.areaPlaced;
 
-        PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
-        PlacementArea areaPlaced = placedObject.areaPlaced;
+                areaPlaced.RemoveBlock();
+                Destroy(hit.collider.gameObject);
+                Debug.Log(areaPlaced);
+                }
+            else if (hit.collider.tag == "Object")
+                {
+                PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+                PlacementArea areaPlaced = placedObject.areaPlaced;
 
-
-        if (hit.collider.tag == "Block")
-        {
-            areaPlaced.RemoveBlock();
-            Destroy(hit.collider.gameObject);
-            Debug.Log(areaPlaced);
+                //PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
+                areaPlaced.RemoveObject();
+                Destroy(hit.collider.gameObject);
+                }
+            }
         }
-
-        else if (hit.collider.tag == "Object")
-        {
-            //PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
-            areaPlaced.RemoveObject();
-            Destroy(hit.collider.gameObject);
-        }
-    }
 
     public void ChangeCurrentObject(GameObject newObject)
     {
@@ -168,17 +169,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearAll()
     {
-        GameObject[] blocks = GameObject.FindGameObjectsWithTag("Block");
-        for (int i = 0; i < blocks.Length; i++)
-        {
-            Destroy(blocks[i]);
-        }
-
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
-        for (int i = 0; i < objects.Length; i++)
-        {
-            Destroy(objects[i]);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Launch()
