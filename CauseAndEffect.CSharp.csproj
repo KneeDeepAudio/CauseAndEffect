@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\BallistaArrow.cs" />
     <Compile Include="Assets\Scripts\BallistaTrigger.cs" />
     <Compile Include="Assets\Scripts\Block.cs" />
+    <Compile Include="Assets\Scripts\BounceTest.cs" />
     <Compile Include="Assets\Scripts\Catapult.cs" />
     <Compile Include="Assets\Scripts\CatapultBall.cs" />
     <Compile Include="Assets\Scripts\CatapultTrigger.cs" />
