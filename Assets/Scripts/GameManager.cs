@@ -5,12 +5,13 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
-
+    public AudioClip[] chooseObject;
+    int chooseObjecti = 0;
     public GameObject block;
     public float range = 100f;
     public bool inPlay = false;
     public float maxObjectDistance = 0.5f;
-
+    AudioSource canvasSource;
     private GameObject currentObject;
     private int placeableMask;
     private Ray ray;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        canvasSource = GameObject.Find("Canvas").GetComponent<AudioSource>();
         currentObject = block;
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
@@ -155,6 +157,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangeCurrentObject(GameObject newObject)
     {
+        canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
+        canvasSource.Play();
         currentObject = newObject;
     }
 

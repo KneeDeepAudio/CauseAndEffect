@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
 
     public Button launchButton;
-
+    AudioSource uiAudioSource;
     private GameObject winText;
     private GameObject continueButton;
+    public AudioClip pauseClip, launchClip;
     public GameObject pausePanel;
 
     void Awake()
     {
         winText = GameObject.FindGameObjectWithTag("Win Text");
         continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
-
+        uiAudioSource = GetComponent<AudioSource>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
 
     }
@@ -51,6 +52,10 @@ public class UIManager : MonoBehaviour {
 
     void GameReset()
     {
+        uiAudioSource.clip = pauseClip;
+        winText.SetActive(false);
+        continueButton.SetActive(false);
+        uiAudioSource.Play();
         launchButton.onClick.RemoveAllListeners();
         launchButton.onClick.AddListener(delegate { GameManager.instance.Launch(); });
         launchButton.GetComponentInChildren<Text>().text = "Play";
@@ -58,6 +63,8 @@ public class UIManager : MonoBehaviour {
 
     void GameLaunch()
     {
+        uiAudioSource.clip = launchClip;
+        uiAudioSource.Play();
         launchButton.onClick.RemoveAllListeners();
         launchButton.onClick.AddListener(delegate { GameManager.instance.Restart(); } );
         launchButton.GetComponentInChildren<Text>().text = "Reset";
