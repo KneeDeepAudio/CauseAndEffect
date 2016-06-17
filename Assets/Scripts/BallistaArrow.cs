@@ -8,26 +8,63 @@ public class BallistaArrow : MonoBehaviour {
     public float xUpdate;
     public float yUpdate;
 
-	// Update is called once per frame
-	void Update ()
+    private SpriteRenderer sprite;
+    private Rigidbody2D body;
+    private BoxCollider2D col;
+
+    private GameObject parentBalista;
+    private Vector2 travelForce;
+
+    void Awake()
     {
-	    if (active)
+        sprite = GetComponent<SpriteRenderer>();
+        body = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
+        parentBalista = transform.parent.gameObject;
+    }
+
+    void Start()
+    {
+        body.isKinematic = true;
+        col.enabled = false;
+        travelForce = new Vector2(xUpdate, yUpdate);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (active)
         {
-            this.transform.position = new Vector3(transform.position.x + (xUpdate * Time.deltaTime), transform.position.y + (yUpdate * Time.deltaTime));
-            this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            //this.transform.position = new Vector3(transform.position.x + (xUpdate * Time.deltaTime), transform.position.y + (yUpdate * Time.deltaTime));
+            //body.AddForce(travelForce, ForceMode2D.Force);
+            sprite.enabled = true;
+            body.isKinematic = false;
+            col.enabled = true;
+
+            if (numReflect >= 4)
+            {
+                sprite.enabled = false;
+                body.isKinematic = true;
+                col.enabled = false;
+                xUpdate = 0.0f;
+                yUpdate = 0.0f;
+            }
         }
-        if(numReflect >= 4)
-        {
-            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            xUpdate = 0.0f;
-            yUpdate = 0.0f;
-        }
-	}
+    }
+
+    public void Shoot()
+    {
+        body.velocity = new Vector2(xUpdate, yUpdate);
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        // Don't check for collisions on self
+        if (other.gameObject == parentBalista)
+        {
+            return;
+        }
+
         Vector3 pos = this.gameObject.transform.position;
         Vector3 otherPos = other.gameObject.transform.position;
 
@@ -38,6 +75,14 @@ public class BallistaArrow : MonoBehaviour {
         {
             numReflect = 4;
         }
+        else
+        {
+            numReflect++;
+        }
+
+
+        /*
+
         if(other.gameObject.tag == "Platform")
         {
             //if(pos.x < otherPos.y)
@@ -77,23 +122,45 @@ public class BallistaArrow : MonoBehaviour {
         //if (Physics.Raycast(this.gameObject.transform.position, vertiFwd))
         //    yUpdate = -yUpdate;
 
+        
+
         if (other.gameObject.tag == "LRWall")
         {
             ++numReflect;
             xUpdate = -xUpdate;
             if (xUpdate > 0.0f)
-                this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                sprite.flipX = false;
             else
-                this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                sprite.flipX = true;
         }
         if (other.gameObject.tag == "TBWall")
         {
             ++numReflect;
             yUpdate = -yUpdate;
             if (yUpdate > 0.0f)
-                this.gameObject.GetComponent<SpriteRenderer>().flipY = false;
+                sprite.flipY = false;
             else
-                this.gameObject.GetComponent<SpriteRenderer>().flipY = true;
+                sprite.flipY = true;
         }
+
+        */
+    }
+
+    void OnEnable()
+    {
+        //GameEventManager.GameLaunch += GameLaunch;
+        GameEventManager.GameReset += GameReset;
+        this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+    }
+
+    void OnDisable()
+    {
+        //GameEventManager.GameReset -= GameLaunch;
+        GameEventManager.GameReset -= GameReset;
+    }
+
+    void GameReset()
+    {
+        body.isKinematic = true;
     }
 }
