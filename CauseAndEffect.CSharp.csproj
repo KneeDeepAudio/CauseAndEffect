@@ -92,6 +92,8 @@
     <Compile Include="Assets\Scripts\EndButton.cs" />
     <Compile Include="Assets\Scripts\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Ice.cs" />
+    <Compile Include="Assets\Scripts\LavaPlatform.cs" />
     <Compile Include="Assets\Scripts\LevelSelectUI.cs" />
     <Compile Include="Assets\Scripts\MovingPlatfrm.cs" />
     <Compile Include="Assets\Scripts\PlaceableObject.cs" />
