@@ -14,7 +14,7 @@ public class EndButton : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall")
+        if (collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall" || collider.gameObject.tag == "Bolt")
         {
             hitSound.Play();
             guiManager.LevelComplete();
