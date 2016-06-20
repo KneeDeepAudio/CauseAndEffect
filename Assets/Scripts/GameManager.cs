@@ -157,9 +157,9 @@ public class GameManager : MonoBehaviour
 
     public void ChangeCurrentObject(GameObject newObject)
     {
-        canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
-        canvasSource.Play();
         currentObject = newObject;
+        //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
+        //canvasSource.Play();   
     }
 
     public void Restart()
