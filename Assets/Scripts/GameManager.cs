@@ -5,12 +5,13 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
-
+    public AudioClip[] chooseObject;
+    int chooseObjecti = 0;
     public GameObject block;
     public float range = 100f;
     public bool inPlay = false;
     public float maxObjectDistance = 0.5f;
-
+    AudioSource canvasSource;
     private GameObject currentObject;
     private int placeableMask;
     private Ray ray;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        canvasSource = GameObject.Find("Canvas").GetComponent<AudioSource>();
         currentObject = block;
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
@@ -124,38 +126,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void RemoveObject()
-    {
+    void RemoveObject ()
+        {
         Debug.Log("Raycast Fire");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin,ray.direction);
 
         foreach (RaycastHit2D hit in hits)
-        {
-            if (hit.collider.tag == "Block")
             {
+            if (hit.collider.tag == "Block")
+                {
                 PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
                 PlacementArea areaPlaced = placedObject.areaPlaced;
 
                 areaPlaced.RemoveBlock();
                 Destroy(hit.collider.gameObject);
                 Debug.Log(areaPlaced);
-            }
-
+                }
             else if (hit.collider.tag == "Object")
-            {
+                {
                 PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
                 PlacementArea areaPlaced = placedObject.areaPlaced;
 
                 //PlacementArea areaPlaced = hit.collider.gameObject.GetComponent<PlacementArea>();
                 areaPlaced.RemoveObject();
                 Destroy(hit.collider.gameObject);
+                }
             }
         }
-    }
 
     public void ChangeCurrentObject(GameObject newObject)
     {
+        canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
+        canvasSource.Play();
         currentObject = newObject;
     }
 

@@ -43,8 +43,8 @@ public class Block : MonoBehaviour {
                 }
         if (!hitOnce && other.collider.tag == "Block" || other.collider.tag == "Object" || other.collider.tag == "StartBlock")
             {
-            blockContacti = blockContacti + 1 >= 7 ? 0 : blockContacti + 1;
-            this_blockAudio.clip = blockContact[blockContacti];
+           // blockContacti = blockContacti + 1 >= 7 ? 0 : blockContacti + 1;
+            this_blockAudio.clip = blockContact[0];
             this_blockAudio.Play();
             }
 

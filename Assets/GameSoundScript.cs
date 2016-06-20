@@ -32,7 +32,7 @@ public class GameSoundScript : MonoBehaviour {
         {
 
         if (SceneManager.GetActiveScene().buildIndex > 2)
-            playInGameTrack();
+            Destroy(gameObject);//playInGameTrack();
 
         }
 

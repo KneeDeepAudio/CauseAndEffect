@@ -36,12 +36,25 @@ public class Ballista : MonoBehaviour {
 
     public void GameLaunch()
     {
+        if (!arrow)
+            return;
         arrowPos = arrow.transform.position;
         hasFired = false;
         arrow.active = false;
         this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
     }
-
+   /* public void OnMouseDown ()
+        {
+        if (changed)
+            return;
+        direction *= -1;
+        Debug.Log("Flip: " + gameObject.transform.position);
+        //gameObject.transform.Rotate(0f,180,0f);
+        transform.rotation = new Quaternion(0f,180f,0,0);
+        ballPosition = catapultBall.transform.position;
+        changed = true;
+        }
+        */
     public void GameReset()
     {
         hasFired = false;
