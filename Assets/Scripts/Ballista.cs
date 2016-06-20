@@ -30,7 +30,8 @@ public class Ballista : MonoBehaviour {
             hasFired = true;
             arrow.active = true;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = frame1;
-        }
+            arrow.Shoot();
+        }        
     }
 
     public void GameLaunch()

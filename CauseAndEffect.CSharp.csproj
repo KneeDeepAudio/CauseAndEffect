@@ -77,12 +77,15 @@
     <Compile Include="Assets\Scripts\Catapult.cs" />
     <Compile Include="Assets\Scripts\CatapultBall.cs" />
     <Compile Include="Assets\Scripts\CatapultTrigger.cs" />
+    <Compile Include="Assets\Scripts\ChangeScene.cs" />
     <Compile Include="Assets\Scripts\DragMe.cs" />
     <Compile Include="Assets\Scripts\DragPanel.cs" />
     <Compile Include="Assets\Scripts\DropMe.cs" />
     <Compile Include="Assets\Scripts\EndButton.cs" />
     <Compile Include="Assets\Scripts\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Ice.cs" />
+    <Compile Include="Assets\Scripts\LavaPlatform.cs" />
     <Compile Include="Assets\Scripts\LevelSelectUI.cs" />
     <Compile Include="Assets\Scripts\MovingPlatfrm.cs" />
     <Compile Include="Assets\Scripts\PlaceableObject.cs" />
@@ -93,7 +96,7 @@
     <Compile Include="Assets\SoundScript.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Textures and Sprites\SF UI\Background\LICENSE.txt" />
+    <None Include="Assets\Textures and Sprites\Background\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
