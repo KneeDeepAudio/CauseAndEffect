@@ -9,6 +9,10 @@ public class EndButton : MonoBehaviour {
     void Awake()
     {
         hitSound = GetComponent<AudioSource>();
+    }
+
+    void Start()
+    {
         guiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIManager>();
     }
 
