@@ -53,9 +53,9 @@ public class BallistaArrow : MonoBehaviour
         }
     }
 
-    public void Shoot()
+    public void Shoot(float direction)
     {
-        body.velocity = new Vector2(xUpdate, yUpdate);
+        body.velocity = new Vector2(xUpdate*direction, yUpdate);
     }
 
     void OnCollisionEnter2D(Collision2D other)

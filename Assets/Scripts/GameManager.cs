@@ -124,6 +124,12 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Placed Object");
             }
         }
+
+        if(hit.collider.tag == "Object")
+        {
+            PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+            placedObject.ObjectFlip();
+        }
     }
 
     void RemoveObject ()
