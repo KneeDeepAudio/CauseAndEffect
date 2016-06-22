@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        canvasSource = GameObject.Find("Canvas").GetComponent<AudioSource>();
+        canvasSource = GameObject.FindGameObjectWithTag("Canvas").GetComponent<AudioSource>();
         currentObject = block;
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
