@@ -10,18 +10,40 @@ public class LavaPlatform : MonoBehaviour {
         if (col.gameObject.tag == "Bolt")
         {
             Debug.Log("Lava Hit!");
-            Destroy(col.gameObject);
+            DumpThing(col.gameObject);
         }
         
         else
         {
-            StartCoroutine(DestroyObject(col.gameObject));
+            StartCoroutine(DumpObject(col.gameObject));
         } 
     }
 
-    IEnumerator DestroyObject(GameObject toDestroy)
+    IEnumerator DumpObject(GameObject toDestroy)
     {
         yield return new WaitForSeconds(secondsToDestroy);
-        Destroy(toDestroy);
+        DumpThing(toDestroy);
     }
+
+    void DumpThing(GameObject thing)
+    {
+        GameObject dumpPoint = GameObject.FindGameObjectWithTag("Bucket");
+        if(dumpPoint != null) thing.transform.position = dumpPoint.transform.position;
+    }
+
+    void GameReset()
+    {
+        StopAllCoroutines();
+    }
+
+    void OnEnable()
+    {
+        GameEventManager.GameReset += GameReset;
+    }
+
+    void OnDisable()
+    {
+        GameEventManager.GameReset -= GameReset;
+    }
+
 }

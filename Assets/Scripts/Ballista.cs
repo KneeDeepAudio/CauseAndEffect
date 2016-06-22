@@ -6,15 +6,27 @@ public class Ballista : MonoBehaviour {
     public BallistaArrow arrow;
     public Sprite frame0;
     public Sprite frame1;
+    public SpriteRenderer ballistaSprite;
     public bool hasFired = false;
 
     private Vector3 arrowPos;
+    private SpriteRenderer arrowSprite;
+    private Rigidbody2D body;
+    private bool changed;
+    private float direction = 1;
+
+
+    void Awake()
+    {
+        arrowSprite = arrow.GetComponent<SpriteRenderer>();
+        body = GetComponent<Rigidbody2D>();
+    }
 
     void OnEnable()
     {
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset  += GameReset;
-        this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        body.isKinematic = false;
     }
 
     void OnDisable()
@@ -29,9 +41,32 @@ public class Ballista : MonoBehaviour {
         {
             hasFired = true;
             arrow.active = true;
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = frame1;
-            arrow.Shoot();
+            ballistaSprite.sprite = frame1;
+            arrow.Shoot(direction);
         }        
+    }
+
+    public void Flip()
+    {
+        Debug.Log("FLIPPED THE BITCH");
+        if (changed)
+        {
+            direction *= -1;
+            Debug.Log("Flip: " + gameObject.transform.position);
+            //gameObject.transform.Rotate(0f,180,0f);
+            transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            arrowPos = arrow.transform.position;
+            changed = false;
+        }
+        else if (!changed)
+        {
+            direction *= -1;
+            Debug.Log("Flip: " + gameObject.transform.position);
+            //gameObject.transform.Rotate(0f,180,0f);
+            transform.rotation = new Quaternion(0f, 180f, 0, 0);
+            arrowPos = arrow.transform.position;
+            changed = true;
+        }
     }
 
     public void GameLaunch()
@@ -58,14 +93,14 @@ public class Ballista : MonoBehaviour {
     public void GameReset()
     {
         hasFired = false;
-        this.gameObject.GetComponent<SpriteRenderer>().sprite = frame0;
-        this.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+        ballistaSprite.sprite = frame0;
+        body.isKinematic = true;
 
         arrow.active = false;
         arrow.transform.position = arrowPos;
-        arrow.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        arrow.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        arrow.gameObject.GetComponent<SpriteRenderer>().flipY = false;
+        arrowSprite.enabled = false;
+        arrowSprite.flipX = false;
+        arrowSprite.flipY = false;
         arrow.xUpdate = 10.0f;
         arrow.yUpdate = 7.5f;
         arrow.numReflect = 0;
