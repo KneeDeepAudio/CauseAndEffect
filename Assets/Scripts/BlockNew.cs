@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Block : MonoBehaviour {
+public class BlockNew : MonoBehaviour {
 
     [Header("Audio")]
     public AudioClip[] blockContact;
@@ -14,8 +14,10 @@ public class Block : MonoBehaviour {
     private Quaternion initialRotation;
     private Rigidbody2D body;
 
-    DistanceJoint2D dJoint; //To reference the joint when created
-    float dJointDistance;   //To reset dJoint distance
+    DistanceJoint2D dJoint;
+    float dJointDistance;
+    IEnumerator shortening;
+
 
     private bool collided = false;
 
@@ -23,6 +25,7 @@ public class Block : MonoBehaviour {
 
     void Awake()
     {
+        shortening = ShortenChain();
         body = GetComponent<Rigidbody2D>();
        // blockContact = GetComponent<AudioSource>();
         this_blockAudio = GetComponent<AudioSource>();
@@ -41,6 +44,8 @@ public class Block : MonoBehaviour {
             dJoint.enabled = true;
             StartCoroutine(ShortenChain());
             }
+
+
 
         Debug.Log("Hit by" + other.gameObject.tag);
 
@@ -65,11 +70,11 @@ public class Block : MonoBehaviour {
     IEnumerator ShortenChain ()
         {
         Debug.Log(dJoint.distance > dJointDistance / 3);
-        while (GameManager.instance.inPlay && dJoint.distance > dJointDistance / 3)
+        while (GameManager.instance.inPlay && dJoint.distance>dJointDistance/3)
             {
-            //  Debug.Log("Shortening" + shortening);
-            dJoint.distance = Mathf.Lerp(dJoint.distance,dJointDistance / 3,Time.deltaTime);
-            if (dJoint.distance - 0.1f < dJointDistance / 3)
+          //  Debug.Log("Shortening" + shortening);
+            dJoint.distance = Mathf.Lerp(dJoint.distance,dJointDistance/3,Time.deltaTime);
+            if (dJoint.distance-0.1f < dJointDistance / 3)
                 break;
             yield return new WaitForEndOfFrame();
             }
