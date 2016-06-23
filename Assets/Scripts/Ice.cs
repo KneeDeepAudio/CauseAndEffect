@@ -3,25 +3,37 @@ using System.Collections;
 
 public class Ice : MonoBehaviour
 {
- 
-    //public float Health = 70f;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+
+    void Start()
+    {
+        initialPosition = GetComponent<Transform>().position;
+        initialRotation = GetComponent<Transform>().rotation;
+    }
+
+    void GameReset()
+    {
+        transform.rotation = initialRotation;
+        transform.position = initialPosition;
+    }
+
+    void OnEnable()
+    {
+        GameEventManager.GameReset += GameReset;
+    }
+
+    void OnDisable()
+    {
+        GameEventManager.GameReset -= GameReset;
+    }
 
     void OnCollisionEnter2D (Collision2D col)
     {
-        // If the platform is hit by a bolt, destroy the platform
         if (col.gameObject.tag == "Bolt")
         {
-            Destroy(this.gameObject);
+            GameObject dumpPoint = GameObject.FindGameObjectWithTag("Bucket");
+            if (dumpPoint != null) this.transform.position = dumpPoint.transform.position;
         }
-
-        /*
-        if (col.gameObject.GetComponent<Rigidbody2D>() == null) return;
-
-        float damage = col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude * 10;
-        if (damage >= 10)
-            GetComponent<AudioSource>().Play();
-        Health -= damage;
-        if (Health == 0) Destroy(this.gameObject);
-        */
     }
 }
