@@ -44,7 +44,7 @@ public class Star : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Block" || other.gameObject.tag == "Arrow" || 
+        if(other.gameObject.tag == "Block" || other.gameObject.tag == "Bolt" || 
            other.gameObject.tag == "CatapultBall" || other.gameObject.tag == "StartBlock")
         {
             wasHit = true;
