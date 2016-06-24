@@ -10,7 +10,7 @@ public class BallistaTrigger : MonoBehaviour {
         if((collider.gameObject.tag == "Block" || 
             collider.gameObject.tag == "StartBlock" || 
             collider.gameObject.tag =="Bolt" || 
-            collider.gameObject.tag == "CatapultBalls") && GameManager.instance.inPlay)
+            collider.gameObject.tag == "CatapultBall") && GameManager.instance.inPlay)
         {
             Debug.Log("Arrow Fired");
             ballista.FireArrow();
