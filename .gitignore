@@ -2,3 +2,6 @@ Library/
 Temp/
 Assets/Prefabs/Objects.meta
 Assets/Textures.meta
+Assets/Prefabs/Objects/Object_Block_Small_Hinge.prefab
+Assets/Prefabs/Objects/Object_Block_Small_Hinge.prefab.meta
+Assets/Prefabs/AlwaysInclude/Canvas_Old.prefab
