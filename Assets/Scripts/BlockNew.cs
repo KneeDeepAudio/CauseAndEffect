@@ -16,8 +16,6 @@ public class BlockNew : MonoBehaviour {
 
     DistanceJoint2D dJoint;
     float dJointDistance;
-    IEnumerator shortening;
-
 
     private bool collided = false;
 
@@ -25,7 +23,6 @@ public class BlockNew : MonoBehaviour {
 
     void Awake()
     {
-        shortening = ShortenChain();
         body = GetComponent<Rigidbody2D>();
        // blockContact = GetComponent<AudioSource>();
         this_blockAudio = GetComponent<AudioSource>();
@@ -44,8 +41,6 @@ public class BlockNew : MonoBehaviour {
             dJoint.enabled = true;
             StartCoroutine(ShortenChain());
             }
-
-
 
         Debug.Log("Hit by" + other.gameObject.tag);
 

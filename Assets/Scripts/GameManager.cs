@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        canvasSource = GameObject.Find("Canvas").GetComponent<AudioSource>();
+        canvasSource = GameObject.FindGameObjectWithTag("Canvas").GetComponent<AudioSource>();
         currentObject = block;
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
@@ -124,6 +124,12 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Placed Object");
             }
         }
+
+        if(hit.collider.tag == "Object")
+        {
+            PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+            placedObject.ObjectFlip();
+        }
     }
 
     void RemoveObject ()
@@ -157,9 +163,9 @@ public class GameManager : MonoBehaviour
 
     public void ChangeCurrentObject(GameObject newObject)
     {
-        canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
-        canvasSource.Play();
         currentObject = newObject;
+        //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
+        //canvasSource.Play();   
     }
 
     public void Restart()
