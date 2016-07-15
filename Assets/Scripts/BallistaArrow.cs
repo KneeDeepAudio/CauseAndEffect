@@ -11,7 +11,7 @@ public class BallistaArrow : MonoBehaviour
 
     private SpriteRenderer sprite;
     private Rigidbody2D body;
-    private BoxCollider2D col;
+    private PolygonCollider2D col;
 
     private GameObject parentBalista;
     private Vector2 travelForce;
@@ -20,7 +20,7 @@ public class BallistaArrow : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
-        col = GetComponent<BoxCollider2D>();
+        col = GetComponent<PolygonCollider2D>();
         parentBalista = transform.parent.gameObject;
     }
 
@@ -66,6 +66,13 @@ public class BallistaArrow : MonoBehaviour
             return;
         }
 
+        foreach (ContactPoint2D contact in other.contacts)
+        {
+            print(contact.collider.name + " hit " + contact.collider.name);
+            Debug.Log(contact.normal);
+            Debug.DrawRay(contact.point, contact.normal, Color.red);
+        }
+
         Vector3 pos = this.gameObject.transform.position;
         Vector3 otherPos = other.gameObject.transform.position;
 
@@ -80,71 +87,6 @@ public class BallistaArrow : MonoBehaviour
         {
             numReflect++;
         }
-
-
-        /*
-
-        if(other.gameObject.tag == "Platform")
-        {
-            //if(pos.x < otherPos.y)
-            //{
-            //    ++numReflect;
-            //    yUpdate = -yUpdate;
-            //    if (yUpdate > 0.0f)
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = false;
-            //    else
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = true;
-            //}
-            //if(pos.y < otherPos.y)
-            //{
-            //    ++numReflect;
-            //    yUpdate = -yUpdate;
-            //    if (yUpdate > 0.0f)
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = false;
-            //    else
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = true;
-            //}
-
-            //if (xUpdate > 0) // Arrow is traveling right
-            //    horizFwd = this.gameObject.transform.TransformDirection(Vector3.right);
-            //else // Arrow is traveling left
-            //    horizFwd = this.gameObject.transform.TransformDirection(Vector3.left);
-
-            //if (yUpdate > 0) // Arrow is traveling up
-            //    vertiFwd = this.gameObject.transform.TransformDirection(Vector3.up);
-            //else // Arrow is traveling down
-            //    vertiFwd = this.gameObject.transform.TransformDirection(Vector3.down);
-
-            //if (Physics.Raycast(this.gameObject.transform.position, horizFwd))
-            //    xUpdate = -xUpdate;
-        }
-
-
-        //if (Physics.Raycast(this.gameObject.transform.position, vertiFwd))
-        //    yUpdate = -yUpdate;
-
-        
-
-        if (other.gameObject.tag == "LRWall")
-        {
-            ++numReflect;
-            xUpdate = -xUpdate;
-            if (xUpdate > 0.0f)
-                sprite.flipX = false;
-            else
-                sprite.flipX = true;
-        }
-        if (other.gameObject.tag == "TBWall")
-        {
-            ++numReflect;
-            yUpdate = -yUpdate;
-            if (yUpdate > 0.0f)
-                sprite.flipY = false;
-            else
-                sprite.flipY = true;
-        }
-
-        */
     }
 
     void OnEnable()
