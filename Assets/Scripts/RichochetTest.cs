@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BallistaArrow : MonoBehaviour
-{
+public class RichochetTest : MonoBehaviour {
+
     public float speed;
-    public int bounces = 4;
+    private int bounces = 4;
     public GameObject rayOrigin;
 
     private Rigidbody2D body;
@@ -13,26 +13,20 @@ public class BallistaArrow : MonoBehaviour
     private Vector2 nextDirection;
     private SpriteRenderer sprite;
     private PolygonCollider2D col;
-    private Vector3 startPosition;
-    private Quaternion startRotation;
-    private int bouncesLeft;
 
-    void Awake()
-    {
+    void Awake () {
         body = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         col = GetComponent<PolygonCollider2D>();
     }
 
-
+    
     void Start()
     {
         bounce = LayerMask.NameToLayer("Default");
-        startPosition = transform.position;
-        startRotation = transform.rotation;
-
+        TurnOn();
     }
-
+    
     /*
     void Update()
     {
@@ -67,21 +61,19 @@ public class BallistaArrow : MonoBehaviour
     {
         Ray2D a = new Ray2D(rayOrigin.transform.position, rayOrigin.transform.right);
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right, 10f, 1);
-
+        
         if (Deflect(a, out b, hit))
         {
             nextDirection = new Vector2(b.direction.x, b.direction.y);
         }
+        
     }
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        bouncesLeft--;
-
-        if (bouncesLeft == 0)
+        if (bounces == 0)
         {
             TurnOff();
-            return;
         }
 
         Vector3 endPoint = b.origin + 3 * b.direction;
@@ -93,37 +85,20 @@ public class BallistaArrow : MonoBehaviour
         NextDirection();
     }
 
-    public void TurnOff()
+    void TurnOff()
     {
         sprite.enabled = false;
         body.isKinematic = true;
         col.enabled = false;
-        transform.position = startPosition;
-        transform.rotation = startRotation;        
     }
 
-    public void Shoot()
+    void TurnOn()
     {
-        bouncesLeft = bounces;
         sprite.enabled = true;
         body.isKinematic = false;
         col.enabled = true;
         body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
         NextDirection();
     }
-
-    public void GameReset()
-    {
-        TurnOff();
-    }
-
-    void OnEnable()
-    {
-        GameEventManager.GameReset += GameReset;
-    }
-
-    void OnDisable()
-    {
-        GameEventManager.GameReset -= GameReset;
-    }
+    
 }
