@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
 
     public Button launchButton;
-    AudioSource uiAudioSource;
-    private GameObject winText;
-    private GameObject continueButton;
+    public GameObject winText;
+    public GameObject continueButton;
     public AudioClip pauseClip, launchClip;
     public GameObject pausePanel;
 
+    private AudioSource uiAudioSource;
+
     void Awake()
     {
-        winText = GameObject.FindGameObjectWithTag("Win Text");
-        continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
+        //winText = GameObject.FindGameObjectWithTag("Win Text");
+        //continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
         uiAudioSource = GetComponent<AudioSource>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
 
