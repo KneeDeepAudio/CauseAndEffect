@@ -4,16 +4,11 @@ public class EndButton : MonoBehaviour {
 
 
     private AudioSource hitSound;
-    private UIManager guiManager;
+    //private UIManager guiManager;
 
     void Awake()
     {
         hitSound = GetComponent<AudioSource>();
-    }
-
-    void Start()
-    {
-        guiManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<UIManager>();
     }
 
     void OnCollisionEnter2D(Collision2D collider)
@@ -21,7 +16,7 @@ public class EndButton : MonoBehaviour {
         if (collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall" || collider.gameObject.tag == "Bolt")
         {
             hitSound.Play();
-            guiManager.LevelComplete();
+            GameEventManager.TriggerLevelComplete();
         }
     }
 }
