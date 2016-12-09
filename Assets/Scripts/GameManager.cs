@@ -4,15 +4,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
+
     public static GameManager instance = null;
-    public AudioClip[] chooseObject;
-    int chooseObjecti = 0;
+    //public AudioClip[] chooseObject;
+    //int chooseObjecti = 0;
     public GameObject block;
     public float range = 100f;
     public bool inPlay = false;
     public float maxObjectDistance = 0.5f;
-    AudioSource canvasSource;
-    private GameObject currentObject;
+    public GameObject currentObject;
+
+
+    private AudioSource canvasSource;    
     private int placeableMask;
     private Ray ray;
     private RaycastHit rayHit;
@@ -161,13 +164,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-    public void ChangeCurrentObject(GameObject newObject)
-    {
-        currentObject = newObject;
-        //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
-        //canvasSource.Play();   
-    }
-
     public void Restart()
     {
         if (inPlay)
@@ -175,11 +171,6 @@ public class GameManager : MonoBehaviour
             inPlay = false;
             GameEventManager.TriggerGameReset();
         }
-    }
-
-    public void ClearAll()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void Launch()
