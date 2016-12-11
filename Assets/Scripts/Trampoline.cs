@@ -19,29 +19,29 @@ public class Trampoline : MonoBehaviour {
         trampContact = GetComponent<AudioSource>();
     }
 
-    void GameLaunch()
-    {
-        col.sharedMaterial = bounceMat;
-        rBody.constraints = RigidbodyConstraints2D.FreezeAll ;
-    }
+    //void GameLaunch()
+    //{
+    //    col.sharedMaterial = bounceMat;
+    //    rBody.constraints = RigidbodyConstraints2D.FreezeAll ;
+    //}
 
-    void GameReset()
-    {
-        col.sharedMaterial = flatMat;
-        rBody.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
-    }
+    //void GameReset()
+    //{
+    //    col.sharedMaterial = flatMat;
+    //    rBody.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+    //}
 
-    void OnEnable()
-    {
-        GameEventManager.GameLaunch += GameLaunch;
-        GameEventManager.GameReset += GameReset;
-    }
+    //void OnEnable()
+    //{
+    //    GameEventManager.GameLaunch += GameLaunch;
+    //    GameEventManager.GameReset += GameReset;
+    //}
 
-    void OnDisable()
-    {
-        GameEventManager.GameLaunch -= GameLaunch;
-        GameEventManager.GameReset -= GameReset;
-    }
+    //void OnDisable()
+    //{
+    //    GameEventManager.GameLaunch -= GameLaunch;
+    //    GameEventManager.GameReset -= GameReset;
+    //}
 
     void OnCollisionEnter2D(Collision2D collider)
     {

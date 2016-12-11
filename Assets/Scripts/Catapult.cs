@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Catapult : MonoBehaviour {
 
-    public GameObject catapultBall;
+    public CatapultBall catapultBall;
     public SpriteRenderer catapultImage;
     public Sprite[] catapultAnimation = new Sprite[3];
     public Vector2 ballForce;
@@ -12,14 +12,12 @@ public class Catapult : MonoBehaviour {
     bool changed = false;
 
     //public Transform ballLocation;
-    private Vector3 ballPosition;
-    private Rigidbody2D ballBody;
-    private AudioSource catapultLaunch;
+    //private Vector3 ballPosition;
+    private AudioSource source;
 
     void Awake()
     {
-        ballBody = catapultBall.GetComponent<Rigidbody2D>();
-        catapultLaunch = GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();
     }
 
     void OnEnable()
@@ -34,7 +32,6 @@ public class Catapult : MonoBehaviour {
 
         }
 
-        ballPosition = catapultBall.transform.position;
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
     }
@@ -43,11 +40,10 @@ public class Catapult : MonoBehaviour {
     {
         if (hasFired == false)
         {
-            StartCoroutine("CatapultAnimation");
-            catapultLaunch.Play();
-            ballBody.AddForce(new Vector2(ballForce.x*direction,ballForce.y));
+            //StartCoroutine("CatapultAnimation");
+            source.Play();
             hasFired = true;
-            catapultBall.GetComponent<CatapultBall>().Travel();
+            catapultBall.Travel(ballForce, direction);
         }
     }
 
@@ -69,7 +65,7 @@ public class Catapult : MonoBehaviour {
             Debug.Log("Flip: " + gameObject.transform.position);
             //gameObject.transform.Rotate(0f,180,0f);
             transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-            ballPosition = catapultBall.transform.position;
+            //ballPosition = catapultBall.transform.position;
             changed = false;
         }
         else if (!changed)
@@ -78,7 +74,7 @@ public class Catapult : MonoBehaviour {
             Debug.Log("Flip: " + gameObject.transform.position);
             //gameObject.transform.Rotate(0f,180,0f);
             transform.rotation = new Quaternion(0f, 180f, 0, 0);
-            ballPosition = catapultBall.transform.position;
+            //ballPosition = catapultBall.transform.position;
             changed = true;
         }
     }
@@ -100,14 +96,11 @@ public class Catapult : MonoBehaviour {
         catch (System.Exception e)
             {
             }
-        ballBody.isKinematic = true;
-        catapultBall.transform.position = ballPosition;
-        ballBody.isKinematic = false;
     }
 
     void OnDisable()
     {
-        GameEventManager.GameReset -= GameLaunch;
+        GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
     }
 

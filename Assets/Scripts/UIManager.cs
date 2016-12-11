@@ -5,19 +5,21 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
 
     public Button launchButton;
-    AudioSource uiAudioSource;
-    private GameObject winText;
-    private GameObject continueButton;
+    public GameObject winText;
+    public GameObject continueButton;
     public AudioClip pauseClip, launchClip;
     public GameObject pausePanel;
 
+    private GameManager manager;
+    private AudioSource uiAudioSource;
+
     void Awake()
     {
-        winText = GameObject.FindGameObjectWithTag("Win Text");
-        continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
+        //winText = GameObject.FindGameObjectWithTag("Win Text");
+        //continueButton = GameObject.FindGameObjectWithTag("ContinueButton");
         uiAudioSource = GetComponent<AudioSource>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
-
+        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     void Update()
@@ -30,6 +32,8 @@ public class UIManager : MonoBehaviour {
     {
         winText.SetActive(false);
         continueButton.SetActive(false);
+        launchButton.onClick.RemoveAllListeners();
+        launchButton.onClick.AddListener(delegate { GameManager.instance.Launch(); });
     }
 
     public void Restart()
@@ -70,16 +74,30 @@ public class UIManager : MonoBehaviour {
         launchButton.GetComponentInChildren<Text>().text = "Reset";
     }
 
+    public void ChangeCurrentObject(GameObject newObject)
+    {
+        manager.currentObject = newObject;
+        //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
+        //canvasSource.Play();   
+    }
+
+    public void ClearAll()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     void OnEnable()
     {
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
+        GameEventManager.LevelComplete += LevelComplete;
     }
 
     void OnDisable()
     {
         GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
+        GameEventManager.LevelComplete -= LevelComplete;
     }
 
     public void Pause ()

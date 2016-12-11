@@ -3,165 +3,127 @@ using System.Collections;
 
 public class BallistaArrow : MonoBehaviour
 {
+    public float speed;
+    public int bounces = 4;
+    public GameObject rayOrigin;
 
-    public bool active = false;
-    public short numReflect = 0;
-    public float xUpdate;
-    public float yUpdate;
-
-    private SpriteRenderer sprite;
     private Rigidbody2D body;
-    private BoxCollider2D col;
-
-    private GameObject parentBalista;
-    private Vector2 travelForce;
+    private LayerMask bounce;
+    private Ray2D b;
+    private Vector2 nextDirection;
+    private SpriteRenderer sprite;
+    private PolygonCollider2D col;
+    private Vector3 startPosition;
+    private Quaternion startRotation;
+    private int bouncesLeft;
 
     void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
-        col = GetComponent<BoxCollider2D>();
-        parentBalista = transform.parent.gameObject;
+        sprite = GetComponent<SpriteRenderer>();
+        col = GetComponent<PolygonCollider2D>();
     }
+
 
     void Start()
     {
-        body.isKinematic = true;
-        col.enabled = false;
-        travelForce = new Vector2(xUpdate, yUpdate);
+        bounce = LayerMask.NameToLayer("Default");
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+
     }
 
-    // Update is called once per frame
+    /*
     void Update()
     {
-        if (active)
-        {
-            //this.transform.position = new Vector3(transform.position.x + (xUpdate * Time.deltaTime), transform.position.y + (yUpdate * Time.deltaTime));
-            //body.AddForce(travelForce, ForceMode2D.Force);
-            sprite.enabled = true;
-            body.isKinematic = false;
-            col.enabled = true;
+        Ray2D a = new Ray2D(rayOrigin.transform.position, rayOrigin.transform.right);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right, 10f, 1);
 
-            if (numReflect >= 4)
-            {
-                sprite.enabled = false;
-                body.isKinematic = true;
-                col.enabled = false;
-                xUpdate = 0.0f;
-                yUpdate = 0.0f;
-            }
+        if (Deflect(a, out b, hit))
+        {
+            Debug.DrawLine(a.origin, hit.point);
+            Debug.DrawLine(b.origin, b.origin + 3 * b.direction);
+        }
+    }
+    */
+
+    bool Deflect(Ray2D ray, out Ray2D deflected, RaycastHit2D hit)
+    {
+
+        if (Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right))
+        {
+            Vector2 normal = hit.normal;
+            Vector2 deflect = Vector2.Reflect(ray.direction, normal);
+
+            deflected = new Ray2D(hit.point, deflect);
+            return true;
+        }
+
+        deflected = new Ray2D(Vector3.zero, Vector3.zero);
+        return false;
+    }
+
+    void NextDirection()
+    {
+        Ray2D a = new Ray2D(rayOrigin.transform.position, rayOrigin.transform.right);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right, 10f, 1);
+
+        if (Deflect(a, out b, hit))
+        {
+            nextDirection = new Vector2(b.direction.x, b.direction.y);
         }
     }
 
-    public void Shoot(float direction)
+    void OnCollisionEnter2D(Collision2D collider)
     {
-        body.velocity = new Vector2(xUpdate*direction, yUpdate);
-    }
+        bouncesLeft--;
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        // Don't check for collisions on self
-        if (other.gameObject == parentBalista)
+        if (bouncesLeft == 0)
         {
+            TurnOff();
             return;
         }
 
-        Vector3 pos = this.gameObject.transform.position;
-        Vector3 otherPos = other.gameObject.transform.position;
+        Vector3 endPoint = b.origin + 3 * b.direction;
+        Vector3 dir = endPoint - transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        // Vector3 horizFwd;
-        // Vector3 vertiFwd;
+        body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
+        NextDirection();
+    }
 
-        if (other.gameObject.tag == "Block" || other.gameObject.tag == "EndBlock" || other.gameObject.tag == "Object")
-        {
-            numReflect = 4;
-        }
-        else
-        {
-            numReflect++;
-        }
+    public void TurnOff()
+    {
+        sprite.enabled = false;
+        body.isKinematic = true;
+        col.enabled = false;
+        transform.position = startPosition;
+        transform.rotation = startRotation;        
+    }
 
+    public void Shoot()
+    {
+        bouncesLeft = bounces;
+        sprite.enabled = true;
+        body.isKinematic = false;
+        col.enabled = true;
+        body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
+        NextDirection();
+    }
 
-        /*
-
-        if(other.gameObject.tag == "Platform")
-        {
-            //if(pos.x < otherPos.y)
-            //{
-            //    ++numReflect;
-            //    yUpdate = -yUpdate;
-            //    if (yUpdate > 0.0f)
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = false;
-            //    else
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = true;
-            //}
-            //if(pos.y < otherPos.y)
-            //{
-            //    ++numReflect;
-            //    yUpdate = -yUpdate;
-            //    if (yUpdate > 0.0f)
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = false;
-            //    else
-            //        this.gameObject.GetComponent<SpriteRenderer>().flipY = true;
-            //}
-
-            //if (xUpdate > 0) // Arrow is traveling right
-            //    horizFwd = this.gameObject.transform.TransformDirection(Vector3.right);
-            //else // Arrow is traveling left
-            //    horizFwd = this.gameObject.transform.TransformDirection(Vector3.left);
-
-            //if (yUpdate > 0) // Arrow is traveling up
-            //    vertiFwd = this.gameObject.transform.TransformDirection(Vector3.up);
-            //else // Arrow is traveling down
-            //    vertiFwd = this.gameObject.transform.TransformDirection(Vector3.down);
-
-            //if (Physics.Raycast(this.gameObject.transform.position, horizFwd))
-            //    xUpdate = -xUpdate;
-        }
-
-
-        //if (Physics.Raycast(this.gameObject.transform.position, vertiFwd))
-        //    yUpdate = -yUpdate;
-
-        
-
-        if (other.gameObject.tag == "LRWall")
-        {
-            ++numReflect;
-            xUpdate = -xUpdate;
-            if (xUpdate > 0.0f)
-                sprite.flipX = false;
-            else
-                sprite.flipX = true;
-        }
-        if (other.gameObject.tag == "TBWall")
-        {
-            ++numReflect;
-            yUpdate = -yUpdate;
-            if (yUpdate > 0.0f)
-                sprite.flipY = false;
-            else
-                sprite.flipY = true;
-        }
-
-        */
+    public void GameReset()
+    {
+        TurnOff();
     }
 
     void OnEnable()
     {
-        //GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
-        this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 
     void OnDisable()
     {
-        //GameEventManager.GameReset -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
-    }
-
-    void GameReset()
-    {
-        body.isKinematic = true;
     }
 }

@@ -6,7 +6,7 @@ public static class GameEventManager
 
     public delegate void GameEvent();
 
-    public static event GameEvent GameLaunch, GameReset;
+    public static event GameEvent GameLaunch, GameReset, LevelComplete;
 
     public static void TriggerGameLaunch()
     {
@@ -21,6 +21,14 @@ public static class GameEventManager
         if (GameReset != null)
         {
             GameReset();
+        }
+    }
+
+    public static void TriggerLevelComplete()
+    {
+        if (LevelComplete != null)
+        {
+            LevelComplete();
         }
     }
 }

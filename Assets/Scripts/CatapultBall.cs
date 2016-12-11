@@ -7,14 +7,18 @@ public class CatapultBall : MonoBehaviour
     public AudioClip contactSound;
 
     private AudioSource ballSource;
+    private Rigidbody2D body;
+    private Vector3 ballPosition = Vector3.zero;
 
     void Awake()
     {
         ballSource = GetComponent<AudioSource>();
+        body = GetComponent<Rigidbody2D>();
     }
 
-    public void Travel()
+    public void Travel(Vector2 ballForce, int direction)
     {
+        body.AddForce(new Vector2(ballForce.x * direction, ballForce.y));
         ballSource.Stop();
         ballSource.clip = launchSound;
         ballSource.Play();
@@ -27,4 +31,27 @@ public class CatapultBall : MonoBehaviour
         ballSource.Play();
     }
 
+    void GameLaunch()
+    {
+        ballPosition = transform.localPosition;
+    }
+
+    void GameReset()
+    {
+        body.simulated = false;
+        transform.localPosition = ballPosition;
+        body.simulated = true;
+    }
+
+    void OnEnable()
+    {
+        GameEventManager.GameLaunch += GameLaunch;
+        GameEventManager.GameReset += GameReset;
+    }
+
+    void OnDisable()
+    {
+        GameEventManager.GameLaunch -= GameLaunch;
+        GameEventManager.GameReset -= GameReset;
+    }
 }

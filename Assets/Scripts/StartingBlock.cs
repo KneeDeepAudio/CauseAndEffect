@@ -25,10 +25,10 @@ public class StartingBlock : MonoBehaviour {
 
     void GameReset()
     {
-        rBody.isKinematic = true;
+        rBody.simulated = false;
         transform.rotation = startRotation;
         transform.position = startPosition;
-        rBody.isKinematic = false;
+        rBody.simulated = true;
     }
 
     void GameLaunch()
