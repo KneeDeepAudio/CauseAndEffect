@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour {
         winText.SetActive(false);
         continueButton.SetActive(false);
         launchButton.onClick.RemoveAllListeners();
-        launchButton.onClick.AddListener(delegate { GameManager.instance.Launch(); });
+        launchButton.onClick.AddListener(delegate { Launch(); });
     }
 
     public void Restart()
@@ -84,6 +84,11 @@ public class UIManager : MonoBehaviour {
     public void ClearAll()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Launch()
+    {
+        manager.Launch();
     }
 
     void OnEnable()
