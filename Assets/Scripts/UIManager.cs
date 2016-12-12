@@ -30,10 +30,10 @@ public class UIManager : MonoBehaviour {
 
     void Start()
     {
-        winText.SetActive(false);
-        continueButton.SetActive(false);
-        launchButton.onClick.RemoveAllListeners();
-        launchButton.onClick.AddListener(delegate { GameManager.instance.Launch(); });
+        //winText.SetActive(false);
+        //continueButton.SetActive(false);
+        //launchButton.onClick.RemoveAllListeners();
+        //launchButton.onClick.AddListener(delegate { Launch(); });
     }
 
     public void Restart()
@@ -60,8 +60,8 @@ public class UIManager : MonoBehaviour {
         winText.SetActive(false);
         continueButton.SetActive(false);
         uiAudioSource.Play();
-        launchButton.onClick.RemoveAllListeners();
-        launchButton.onClick.AddListener(delegate { GameManager.instance.Launch(); });
+        //launchButton.onClick.RemoveAllListeners();
+        //launchButton.onClick.AddListener(delegate { GameManager.instance.Launch(); });
         launchButton.GetComponentInChildren<Text>().text = "Play";
     }
 
@@ -69,8 +69,8 @@ public class UIManager : MonoBehaviour {
     {
         uiAudioSource.clip = launchClip;
         uiAudioSource.Play();
-        launchButton.onClick.RemoveAllListeners();
-        launchButton.onClick.AddListener(delegate { GameManager.instance.Restart(); } );
+        //launchButton.onClick.RemoveAllListeners();
+        //launchButton.onClick.AddListener(delegate { GameManager.instance.Restart(); } );
         launchButton.GetComponentInChildren<Text>().text = "Reset";
     }
 
@@ -84,6 +84,16 @@ public class UIManager : MonoBehaviour {
     public void ClearAll()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Launch()
+    {
+        manager.Launch();
+    }
+
+    public void Reset()
+    {
+        manager.Restart();
     }
 
     void OnEnable()
@@ -105,12 +115,12 @@ public class UIManager : MonoBehaviour {
         if (Time.timeScale == 1)
             {
             Time.timeScale = 0;
-            pausePanel.SetActive(true);
+            //pausePanel.SetActive(true);
             }
         else if (Time.timeScale == 0)
             {
             Time.timeScale = 1;
-            pausePanel.SetActive(false);
+            //pausePanel.SetActive(false);
             }
         }
 
