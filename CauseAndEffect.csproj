@@ -95,6 +95,8 @@
     <Compile Include="Assets\Scripts\Ice.cs" />
     <Compile Include="Assets\Scripts\LavaPlatform.cs" />
     <Compile Include="Assets\Scripts\LevelSelectUI.cs" />
+    <Compile Include="Assets\Scripts\Menu.cs" />
+    <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\MovingPlatfrm.cs" />
     <Compile Include="Assets\Scripts\PlaceableObject.cs" />
     <Compile Include="Assets\Scripts\PlacementArea.cs" />
