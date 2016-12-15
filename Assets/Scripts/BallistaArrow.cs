@@ -96,7 +96,8 @@ public class BallistaArrow : MonoBehaviour
     public void TurnOff()
     {
         sprite.enabled = false;
-        body.isKinematic = true;
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0f;
         col.enabled = false;
         transform.position = startPosition;
         transform.rotation = startRotation;        
@@ -106,7 +107,6 @@ public class BallistaArrow : MonoBehaviour
     {
         bouncesLeft = bounces;
         sprite.enabled = true;
-        body.isKinematic = false;
         col.enabled = true;
         body.velocity = new Vector2(transform.right.x, transform.right.y) * speed;
         NextDirection();

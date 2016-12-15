@@ -105,6 +105,7 @@
     <Compile Include="Assets\Scripts\RichochetTest.cs" />
     <Compile Include="Assets\Scripts\ScrollRectSnap.cs" />
     <Compile Include="Assets\Scripts\SoundScript.cs" />
+    <Compile Include="Assets\Scripts\SpriteDrag.cs" />
     <Compile Include="Assets\Scripts\Star.cs" />
     <Compile Include="Assets\Scripts\StartingBlock.cs" />
     <Compile Include="Assets\Scripts\Trampoline.cs" />

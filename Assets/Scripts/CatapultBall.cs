@@ -38,9 +38,9 @@ public class CatapultBall : MonoBehaviour
 
     void GameReset()
     {
-        body.simulated = false;
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0f;
         transform.localPosition = ballPosition;
-        body.simulated = true;
     }
 
     void OnEnable()

@@ -26,7 +26,6 @@ public class Ballista : MonoBehaviour {
     {
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset  += GameReset;
-        body.isKinematic = false;
     }
 
     void OnDisable()
@@ -74,14 +73,12 @@ public class Ballista : MonoBehaviour {
             return;
         arrowPos = arrow.transform.position;
         hasFired = false;
-        this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 
     public void GameReset()
     {
         hasFired = false;
         ballistaSprite.sprite = frame0;
-        body.isKinematic = true;
 
         arrow.transform.position = arrowPos;
         arrowSprite.enabled = false;

@@ -25,10 +25,10 @@ public class StartingBlock : MonoBehaviour {
 
     void GameReset()
     {
-        rBody.simulated = false;
+        rBody.velocity = Vector2.zero;
+        rBody.angularVelocity = 0f;
         transform.rotation = startRotation;
         transform.position = startPosition;
-        rBody.simulated = true;
     }
 
     void GameLaunch()
