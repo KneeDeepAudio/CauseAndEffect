@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\BallistaTrigger.cs" />
     <Compile Include="Assets\Scripts\Block.cs" />
     <Compile Include="Assets\Scripts\BlockNew.cs" />
+    <Compile Include="Assets\Scripts\BlockSpawn.cs" />
     <Compile Include="Assets\Scripts\Catapult.cs" />
     <Compile Include="Assets\Scripts\CatapultBall.cs" />
     <Compile Include="Assets\Scripts\CatapultTrigger.cs" />
@@ -98,15 +99,17 @@
     <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\MovingPlatfrm.cs" />
+    <Compile Include="Assets\Scripts\ObjectSpawn.cs" />
     <Compile Include="Assets\Scripts\PlaceableObject.cs" />
     <Compile Include="Assets\Scripts\PlacementArea.cs" />
     <Compile Include="Assets\Scripts\RichochetTest.cs" />
+    <Compile Include="Assets\Scripts\ScrollRectSnap.cs" />
     <Compile Include="Assets\Scripts\SoundScript.cs" />
     <Compile Include="Assets\Scripts\Star.cs" />
     <Compile Include="Assets\Scripts\StartingBlock.cs" />
     <Compile Include="Assets\Scripts\Trampoline.cs" />
+    <Compile Include="Assets\Scripts\UIDrag.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
-    <Compile Include="Assets\ScrollRectSnap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Textures and Sprites\Background\LICENSE.txt" />

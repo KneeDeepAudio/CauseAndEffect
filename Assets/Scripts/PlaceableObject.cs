@@ -6,6 +6,8 @@ public class PlaceableObject : MonoBehaviour
 
     public PlacementArea areaPlaced;
 
+    public ObjectSpawn spawnArea;
+
     private bool changed;
     private float direction;
     private Catapult catapult;
