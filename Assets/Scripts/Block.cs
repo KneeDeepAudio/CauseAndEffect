@@ -109,10 +109,10 @@ public class Block : MonoBehaviour {
             }
         hitOnce = false;
         blockContacti = -1;
-        body.simulated = false;
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0f;
         transform.rotation = initialRotation;
         transform.position = initialPosition;
-        body.simulated = true;
         collided = false;
     }
 
