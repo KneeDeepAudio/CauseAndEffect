@@ -10,6 +10,9 @@ public class PlacementArea : MonoBehaviour
     public float shadeAlpha = 0.35f;
     public int maxBlocks = 4;
 
+    public ObjectSpawn objectArea;
+    public ObjectSpawn[] blockAreas;
+
     private int blockCount = 0;
     private int[] blocks;
     private SpriteRenderer sprite;
@@ -23,6 +26,8 @@ public class PlacementArea : MonoBehaviour
         col = sprite.color;
         blocks = new int[4];
         col2D = GetComponent<BoxCollider2D>();
+
+        RemoveHighlight();
     }
 
     public bool IsFull
@@ -47,6 +52,16 @@ public class PlacementArea : MonoBehaviour
         {
             return this.blockPlaced;
         }
+    }
+
+    public bool BlockPlaced()
+    {
+        foreach (ObjectSpawn spawnArea in blockAreas)
+        {
+            if (spawnArea.IsFull)
+                return true;
+        }
+        return false;
     }
 
     public void PlaceBlock()
@@ -92,6 +107,30 @@ public class PlacementArea : MonoBehaviour
             full = false;
             sprite.enabled = true;
             col2D.enabled = true;
+        }
+    }
+
+    public void HighlightObjectPlacement()
+    {
+        if(!BlockPlaced() && !objectArea.IsFull)
+        objectArea.Highlight();
+    }
+
+    public void HighlightBlockPlacement()
+    {
+        foreach (ObjectSpawn spawnArea in blockAreas)
+        {
+            if(!spawnArea.IsFull && !objectArea.IsFull)
+                spawnArea.Highlight();
+        }
+    }
+
+    public void RemoveHighlight()
+    {
+        objectArea.RemoveHighlight();
+        foreach (ObjectSpawn spawnArea in blockAreas)
+        {
+            spawnArea.RemoveHighlight();
         }
     }
 }
