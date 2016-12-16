@@ -51,23 +51,23 @@ public class GameManager : MonoBehaviour
         startBlockStartRot = startingBlock.transform.rotation;
     }
 
-    void Update()
-    {
-        if (inPlay == false)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                // place an object
-                Debug.Log("Place Object Fire");
-                PlaceObject();
-            }
+    //void Update()
+    //{
+    //    if (inPlay == false)
+    //    {
+    //        if (Input.GetButtonDown("Fire1"))
+    //        {
+    //            // place an object
+    //            Debug.Log("Place Object Fire");
+    //            //PlaceObject();
+    //        }
 
-            if (Input.GetButtonDown("Fire2"))
-            {
-                RemoveObject();
-            }
-        }
-    }
+    //        if (Input.GetButtonDown("Fire2"))
+    //        {
+    //            RemoveObject();
+    //        }
+    //    }
+    //}
 
     public void PlaceObject()
     {
