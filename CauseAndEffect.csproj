@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Block.cs" />
     <Compile Include="Assets\Scripts\BlockNew.cs" />
     <Compile Include="Assets\Scripts\BlockSpawn.cs" />
+    <Compile Include="Assets\Scripts\CameraControls.cs" />
     <Compile Include="Assets\Scripts\Catapult.cs" />
     <Compile Include="Assets\Scripts\CatapultBall.cs" />
     <Compile Include="Assets\Scripts\CatapultTrigger.cs" />
