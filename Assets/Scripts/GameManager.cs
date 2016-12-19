@@ -51,23 +51,23 @@ public class GameManager : MonoBehaviour
         startBlockStartRot = startingBlock.transform.rotation;
     }
 
-    //void Update()
-    //{
-    //    if (inPlay == false)
-    //    {
-    //        if (Input.GetButtonDown("Fire1"))
-    //        {
-    //            // place an object
-    //            Debug.Log("Place Object Fire");
-    //            //PlaceObject();
-    //        }
+    void Update()
+    {
+        //    if (inPlay == false)
+        //    {
+        //        if (Input.GetButtonDown("Fire1"))
+        //        {
+        //            // place an object
+        //            Debug.Log("Place Object Fire");
+        //            //PlaceObject();
+        //        }
+        //    )
 
-    //        if (Input.GetButtonDown("Fire2"))
-    //        {
-    //            RemoveObject();
-    //        }
-    //    }
-    //}
+        if (Input.GetButtonDown("Fire2"))
+        {
+                PlaceObject();
+        }
+    }
 
     public void PlaceObject()
     {
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         // If nothing is hit, stop doing things
         if (!hit)
             return;
-
+/*
         // Check if player is placing object in the right area
         if (hit.collider.tag == "ObjectPlacement")
         {
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Placed Object");
             }
         }
-
+*/
         if(hit.collider.tag == "Object")
         {
             PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
