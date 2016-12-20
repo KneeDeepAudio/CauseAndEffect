@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CauseAndEffect", "CauseAndEffect.csproj", "{DA6597F8-D81D-7392-4153-989F1B5635BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CauseAndEffect.CSharp", "CauseAndEffect.CSharp.csproj", "{A51B91E1-29B7-161A-BAD0-1AF90C40AD3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA6597F8-D81D-7392-4153-989F1B5635BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA6597F8-D81D-7392-4153-989F1B5635BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA6597F8-D81D-7392-4153-989F1B5635BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA6597F8-D81D-7392-4153-989F1B5635BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A51B91E1-29B7-161A-BAD0-1AF90C40AD3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51B91E1-29B7-161A-BAD0-1AF90C40AD3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51B91E1-29B7-161A-BAD0-1AF90C40AD3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51B91E1-29B7-161A-BAD0-1AF90C40AD3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
