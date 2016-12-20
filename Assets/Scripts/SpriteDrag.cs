@@ -11,6 +11,7 @@ public class SpriteDrag : MonoBehaviour
     private Vector3 startPos;
     private float offsetX, offsetY;
     private Collider2D[] colliders;
+    private GameManager manager;
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class SpriteDrag : MonoBehaviour
 
     void Start ()
     {
-
+        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     void Update()
@@ -35,6 +36,8 @@ public class SpriteDrag : MonoBehaviour
 
     public void OnMouseDown()
     {
+        manager.dragging = true;
+
         Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offsetX = transform.position.x - offset.x;
         offsetY = transform.position.y - offset.y;
@@ -98,6 +101,8 @@ public class SpriteDrag : MonoBehaviour
         {
             area.RemoveHighlight();
         }
+
+        manager.dragging = false;
     }
 
     public void SetLayerRecursively(int layerNumber)

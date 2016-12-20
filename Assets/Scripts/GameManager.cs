@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
     public bool inPlay = false;
+    public bool dragging = false;
 
 #if old_way
     //public AudioClip[] chooseObject;
