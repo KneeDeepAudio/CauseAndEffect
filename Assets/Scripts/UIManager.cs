@@ -11,7 +11,9 @@ public class UIManager : MonoBehaviour {
     public GameObject pausePanel;
 
     private GameManager manager;
+    private InputManager inputManger;
     private AudioSource uiAudioSource;
+    private PlacementArea[] placementAreas;
 
     void Awake()
     {
@@ -20,6 +22,8 @@ public class UIManager : MonoBehaviour {
         uiAudioSource = GetComponent<AudioSource>();
         gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
         manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        inputManger = GameObject.FindGameObjectWithTag("GameController").GetComponent<InputManager>();
+        placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
     }
 
     void Update()
@@ -74,12 +78,14 @@ public class UIManager : MonoBehaviour {
         launchButton.GetComponentInChildren<Text>().text = "Reset";
     }
 
-    //public void ChangeCurrentObject(GameObject newObject)
-    //{
-    //    manager.currentObject = newObject;
-    //    //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
-    //    //canvasSource.Play();   
-    //}
+    public void ChangeCurrentObject(GameObject newObject)
+    {
+        inputManger.currentObject = newObject;
+        ShowHighlights();
+
+        //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
+        //canvasSource.Play();   
+    }
 
     public void ClearAll()
     {
@@ -136,4 +142,21 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene("StartScene");
         }
 
+    public void ShowHighlights()
+    {
+        if (inputManger.currentObject.tag == "Object")
+        {
+            foreach (PlacementArea area in placementAreas)
+            {
+                area.HighlightObjectPlacement();
+            }
+        }
+        else if (inputManger.currentObject.tag == "Block")
+        {
+            foreach (PlacementArea area in placementAreas)
+            {
+                area.HighlightBlockPlacement();
+            }
+        }
     }
+}

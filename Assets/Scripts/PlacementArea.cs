@@ -112,12 +112,14 @@ public class PlacementArea : MonoBehaviour
 
     public void HighlightObjectPlacement()
     {
+        RemoveHighlight();
         if(!BlockPlaced() && !objectArea.IsFull)
         objectArea.Highlight();
     }
 
     public void HighlightBlockPlacement()
     {
+        RemoveHighlight();
         foreach (ObjectSpawn spawnArea in blockAreas)
         {
             if(!spawnArea.IsFull && !objectArea.IsFull)

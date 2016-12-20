@@ -13,9 +13,7 @@ public class GameManager : MonoBehaviour
     //int chooseObjecti = 0;
     //public GameObject block;
     //public float range = 100f;
-    //public float maxObjectDistance = 0.5f;
-    //public GameObject currentObject;
-
+    //public float maxObjectDistance = 0.5f;    
 
     //private AudioSource canvasSource;    
     //private int placeableMask;
@@ -47,7 +45,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         canvasSource = GameObject.FindGameObjectWithTag("Canvas").GetComponent<AudioSource>();
-        currentObject = block;
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
     }
