@@ -87,6 +87,8 @@
     <Compile Include="Assets\Scripts\Block.cs" />
     <Compile Include="Assets\Scripts\BlockNew.cs" />
     <Compile Include="Assets\Scripts\BlockSpawn.cs" />
+    <Compile Include="Assets\Scripts\Camera\TouchCamera.cs" />
+    <Compile Include="Assets\Scripts\CameraControls.cs" />
     <Compile Include="Assets\Scripts\Catapult.cs" />
     <Compile Include="Assets\Scripts\CatapultBall.cs" />
     <Compile Include="Assets\Scripts\CatapultTrigger.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Assets\Scripts\GameSoundScript.cs" />
     <Compile Include="Assets\Scripts\Hinged.cs" />
     <Compile Include="Assets\Scripts\Ice.cs" />
+    <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\LavaPlatform.cs" />
     <Compile Include="Assets\Scripts\LevelSelectUI.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Assets\Scripts\RichochetTest.cs" />
     <Compile Include="Assets\Scripts\ScrollRectSnap.cs" />
     <Compile Include="Assets\Scripts\SoundScript.cs" />
+    <Compile Include="Assets\Scripts\SpriteDrag.cs" />
     <Compile Include="Assets\Scripts\Star.cs" />
     <Compile Include="Assets\Scripts\StartingBlock.cs" />
     <Compile Include="Assets\Scripts\Trampoline.cs" />
