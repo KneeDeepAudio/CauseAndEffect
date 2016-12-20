@@ -4,25 +4,26 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-
     public static GameManager instance = null;
+    public bool inPlay = false;
+
+#if old_way
     //public AudioClip[] chooseObject;
     //int chooseObjecti = 0;
-    public GameObject block;
-    public float range = 100f;
-    public bool inPlay = false;
-    public float maxObjectDistance = 0.5f;
-    public GameObject currentObject;
+    //public GameObject block;
+    //public float range = 100f;
+    //public float maxObjectDistance = 0.5f;
+    //public GameObject currentObject;
 
 
-    private AudioSource canvasSource;    
-    private int placeableMask;
-    private Ray ray;
-    private RaycastHit rayHit;
-    private GameObject startingBlock;
-    private Vector3 startBlockStartPos;
-    private Quaternion startBlockStartRot;
-
+    //private AudioSource canvasSource;    
+    //private int placeableMask;
+    //private Ray ray;
+    //private RaycastHit rayHit;
+    //private GameObject startingBlock;
+    //private Vector3 startBlockStartPos;
+    //private Quaternion startBlockStartRot;
+#endif
 
     void Awake()
     {
@@ -39,10 +40,9 @@ public class GameManager : MonoBehaviour
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(this);
-
-        startingBlock = GameObject.FindGameObjectWithTag("StartBlock");
     }
 
+#if old_way
     void Start()
     {
         canvasSource = GameObject.FindGameObjectWithTag("Canvas").GetComponent<AudioSource>();
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         startBlockStartPos = startingBlock.transform.position;
         startBlockStartRot = startingBlock.transform.rotation;
     }
+
 
     void Update()
     {
@@ -177,6 +178,8 @@ public class GameManager : MonoBehaviour
         }
         */
     }
+
+#endif
 
     public void Restart()
     {
