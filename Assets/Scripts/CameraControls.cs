@@ -23,17 +23,21 @@ public class CameraControls : MonoBehaviour
     private float horzExtent;
 
     private Camera cam;
+    private GameManager manager;
 
     void Start()
     {
         targetOrtho = Camera.main.orthographicSize;
         cam = GetComponent<Camera>();
+        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     void Update()
     {
+        if (manager.dragging)
+            return;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) )
         {
             transform.position += new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * panSpeed * -1f, Input.GetAxisRaw("Mouse Y") * Time.deltaTime * panSpeed * -1f, 0f);
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -20, 10f), Mathf.Clamp(transform.position.y, -20f, 10f), transform.position.z);
@@ -48,6 +52,7 @@ public class CameraControls : MonoBehaviour
         }
 
         Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
+
     }
 
 }

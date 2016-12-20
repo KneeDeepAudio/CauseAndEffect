@@ -25,6 +25,7 @@ public class UIDrag : MonoBehaviour {
 
     public void BeginDrag()
     {
+        manager.dragging = true;
         offsetX = transform.position.x - Input.mousePosition.x;
         offsetY = transform.position.y - Input.mousePosition.y;
 
@@ -69,6 +70,8 @@ public class UIDrag : MonoBehaviour {
         {
             area.RemoveHighlight();
         }
+
+        manager.dragging = false;
 
     }
 }
