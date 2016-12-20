@@ -74,12 +74,12 @@ public class UIManager : MonoBehaviour {
         launchButton.GetComponentInChildren<Text>().text = "Reset";
     }
 
-    public void ChangeCurrentObject(GameObject newObject)
-    {
-        manager.currentObject = newObject;
-        //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
-        //canvasSource.Play();   
-    }
+    //public void ChangeCurrentObject(GameObject newObject)
+    //{
+    //    manager.currentObject = newObject;
+    //    //canvasSource.clip = chooseObject[chooseObjecti + 1 < chooseObject.Length ? ++chooseObjecti : chooseObjecti = 0];
+    //    //canvasSource.Play();   
+    //}
 
     public void ClearAll()
     {
