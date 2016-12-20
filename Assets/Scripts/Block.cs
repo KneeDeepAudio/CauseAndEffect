@@ -75,22 +75,22 @@ public class Block : MonoBehaviour {
             }
         }
 
-    void OnMouseDown ()
-        {
-        if (!Hinged.instance.selected)
-            return;
+    //void OnMouseDown ()
+    //    {
+    //    if (!Hinged.instance.selected)
+    //        return;
 
-        Hinged.instance.Chain(gameObject);
-        gameObject.AddComponent<DistanceJoint2D>().enabled = false;
-        dJoint = gameObject.GetComponent<DistanceJoint2D>();
-        if (dJoint != null)
-            {
-            dJoint.enabled = false;
-            dJoint.connectedBody = /*GameObject.Find("StartingBlock")*/Hinged.instance.gameObject.GetComponent<Rigidbody2D>();
-            dJointDistance = dJoint.distance;
-            Debug.Log("Block is connected to: " + dJoint.connectedBody);
-            }
-        }
+    //    Hinged.instance.Chain(gameObject);
+    //    gameObject.AddComponent<DistanceJoint2D>().enabled = false;
+    //    dJoint = gameObject.GetComponent<DistanceJoint2D>();
+    //    if (dJoint != null)
+    //        {
+    //        dJoint.enabled = false;
+    //        dJoint.connectedBody = /*GameObject.Find("StartingBlock")*/Hinged.instance.gameObject.GetComponent<Rigidbody2D>();
+    //        dJointDistance = dJoint.distance;
+    //        Debug.Log("Block is connected to: " + dJoint.connectedBody);
+    //        }
+    //    }
 
     void Start()
     {

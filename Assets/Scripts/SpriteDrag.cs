@@ -99,10 +99,10 @@ public class SpriteDrag : MonoBehaviour
 
         SetLayerRecursively(LayerMask.NameToLayer("Object"));
 
-        foreach (PlacementArea area in placementAreas)
-        {
-            area.RemoveHighlight();
-        }
+            foreach (PlacementArea area in placementAreas)
+            {
+                area.RemoveHighlight();
+            }
 
         manager.dragging = false;
     }
