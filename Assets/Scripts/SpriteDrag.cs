@@ -67,7 +67,7 @@ public class SpriteDrag : MonoBehaviour
 
     public void OnMouseUp()
     {
-        SetLayerRecursively(LayerMask.NameToLayer("Object"));
+        
         mouseDown = false;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -96,6 +96,8 @@ public class SpriteDrag : MonoBehaviour
             ObjectSpawn areaPlaced = placedObject.spawnArea;
             areaPlaced.RemoveObject();
         }
+
+        SetLayerRecursively(LayerMask.NameToLayer("Object"));
 
         foreach (PlacementArea area in placementAreas)
         {
