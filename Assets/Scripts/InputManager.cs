@@ -4,13 +4,38 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager instance = null;
+
     public GameObject currentObject;
-    private GameManager manager;
     private PlacementArea[] placementAreas;
+
 
     void Awake()
     {
-        manager = GetComponent<GameManager>();
+        #region singleton
+        if (instance == null)
+
+            //if not, set instance to this
+            instance = this;
+
+        //If instance already exists and it's not this:
+        else if (instance != this)
+
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+
+        //Sets this to not be destroyed when reloading scene
+        DontDestroyOnLoad(this);
+        #endregion
+    }
+
+    void Start()
+    {
+        placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
+    }
+
+    private void OnLevelWasLoaded()
+    {
         placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
     }
 
@@ -22,6 +47,10 @@ public class InputManager : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
             FlipObject();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            //Pause();
+            ;
     }
 
     public void PlaceObject()
@@ -58,6 +87,9 @@ public class InputManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
+        if (!hit)
+            return;
+
         if (hit.collider.tag == "Object")
         {
             PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
@@ -83,16 +115,17 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void ShowHighlights()
+    public void ShowHighlights(string tag)
     {
-        if (currentObject.tag == "Object")
+        HideHighlights();
+        if (tag == "Object")
         {
             foreach (PlacementArea area in placementAreas)
             {
                 area.HighlightObjectPlacement();
             }
         }
-        else if (currentObject.tag == "Block")
+        else if (tag == "Block")
         {
             foreach (PlacementArea area in placementAreas)
             {

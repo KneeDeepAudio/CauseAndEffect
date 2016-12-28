@@ -2,27 +2,13 @@
 
 public class SpriteDrag : MonoBehaviour
 {
-
-    private PlacementArea[] placementAreas;
+    public LayerMask layer;
     private Vector3 startLocalPos;
     private ObjectSpawn spawnArea;
     private bool mouseDown = false;
     private Vector3 startMousePos;
     private Vector3 startPos;
     private float offsetX, offsetY;
-    private Collider2D[] colliders;
-    private GameManager manager;
-
-    void Awake()
-    {
-        placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
-        colliders = GetComponents<Collider2D>();
-    }
-
-    void Start ()
-    {
-        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-    }
 
     void Update()
     {
@@ -36,7 +22,7 @@ public class SpriteDrag : MonoBehaviour
 
     public void OnMouseDown()
     {
-        manager.dragging = true;
+        GameManager.instance.dragging = true;
 
         Vector3 offset = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         offsetX = transform.position.x - offset.x;
@@ -51,17 +37,11 @@ public class SpriteDrag : MonoBehaviour
 
         if (gameObject.tag == "Object")
         {
-            foreach (PlacementArea area in placementAreas)
-            {
-                area.HighlightObjectPlacement();
-            }
+            InputManager.instance.ShowHighlights("Object");
         }
         else if (gameObject.tag == "Block")
         {
-            foreach (PlacementArea area in placementAreas)
-            {
-                area.HighlightBlockPlacement();
-            }
+            InputManager.instance.ShowHighlights("Block");
         }
     }
 
@@ -69,11 +49,16 @@ public class SpriteDrag : MonoBehaviour
     {
         
         mouseDown = false;
+        SetLayerRecursively(LayerMask.NameToLayer("Object"));
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100f, layer);
 
         transform.localPosition = startLocalPos;
+        if(hit)
+            Debug.Log(hit.collider.gameObject.name);
+        else
+                Debug.Log("Hit Nothing");
 
         // If player hits an object placement area pass the object to place to the area
         if (hit && hit.collider.tag == "ObjectPlacement")
@@ -97,14 +82,9 @@ public class SpriteDrag : MonoBehaviour
             areaPlaced.RemoveObject();
         }
 
-        SetLayerRecursively(LayerMask.NameToLayer("Object"));
 
-            foreach (PlacementArea area in placementAreas)
-            {
-                area.RemoveHighlight();
-            }
-
-        manager.dragging = false;
+        InputManager.instance.HideHighlights();
+        GameManager.instance.dragging = false;
     }
 
     public void SetLayerRecursively(int layerNumber)
