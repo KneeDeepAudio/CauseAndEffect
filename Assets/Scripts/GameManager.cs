@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
 
 #endif
 
-    public void Restart()
+    public void GameReset()
     {
         if (inPlay)
         {
@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Launch()
+    public void GameLaunch()
     {
         if (!inPlay)
         {

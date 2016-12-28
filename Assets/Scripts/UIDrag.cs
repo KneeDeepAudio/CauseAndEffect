@@ -5,18 +5,9 @@ using UnityEngine;
 public class UIDrag : MonoBehaviour {
 
     public GameObject prefab;
-    public UIManager uiManager;
 
     private float offsetX, offsetY;
-    private GameManager manager;
-    private PlacementArea[] placementAreas;
     private Vector3 startPos;
-
-    void Awake()
-    {
-        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
-    }
 
     void Start()
     {
@@ -25,25 +16,18 @@ public class UIDrag : MonoBehaviour {
 
     public void BeginDrag()
     {
-        manager.dragging = true;
+        GameManager.instance.dragging = true;
         offsetX = transform.position.x - Input.mousePosition.x;
         offsetY = transform.position.y - Input.mousePosition.y;
 
         if(prefab.tag == "Object")  
         {
-            foreach (PlacementArea area in placementAreas)
-            {
-                area.HighlightObjectPlacement();
-            }
+            InputManager.instance.ShowHighlights("Object");
         }
         else if (prefab.tag == "Block")
         {
-            foreach (PlacementArea area in placementAreas)
-            {
-                area.HighlightBlockPlacement();
-            }
+            InputManager.instance.ShowHighlights("Block");
         }
-
     }
 
     public void OnDrag()
@@ -66,12 +50,8 @@ public class UIDrag : MonoBehaviour {
             areaPlaced.PlaceObject(prefab);
         }
 
-        foreach (PlacementArea area in placementAreas)
-        {
-            area.RemoveHighlight();
-        }
-
-        manager.dragging = false;
+        InputManager.instance.HideHighlights();
+        GameManager.instance.dragging = false;
 
     }
 }
