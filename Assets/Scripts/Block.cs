@@ -5,7 +5,6 @@ public class Block : MonoBehaviour {
 
     [Header("Audio")]
     public AudioClip[] blockContact;
-    static int blockContacti = -1;
     AudioSource this_blockAudio;
     public AudioClip blockSet;
     bool hitOnce = false;
@@ -17,9 +16,7 @@ public class Block : MonoBehaviour {
     DistanceJoint2D dJoint; //To reference the joint when created
     float dJointDistance;   //To reset dJoint distance
 
-    private bool collided = false;
-
-    private int directionHit = 1;
+//    private int directionHit = 1;
 
     void Awake()
     {
@@ -44,6 +41,8 @@ public class Block : MonoBehaviour {
 
         Debug.Log("Hit by" + other.gameObject.tag);
 
+        // Unkown function. No reason for being
+        /*
         if (other.transform.position.x < transform.position.x)   //force from left
                 {
                 directionHit = -1;
@@ -52,6 +51,8 @@ public class Block : MonoBehaviour {
                 {
                 directionHit = 1;
                 }
+        */
+
         if (!hitOnce && other.collider.tag == "Block" || other.collider.tag == "Object" || other.collider.tag == "StartBlock")
             {
            // blockContacti = blockContacti + 1 >= 7 ? 0 : blockContacti + 1;
@@ -108,12 +109,10 @@ public class Block : MonoBehaviour {
             dJoint.distance = dJointDistance;
             }
         hitOnce = false;
-        blockContacti = -1;
         body.velocity = Vector2.zero;
         body.angularVelocity = 0f;
         transform.rotation = initialRotation;
         transform.position = initialPosition;
-        collided = false;
     }
 
     void OnEnable()

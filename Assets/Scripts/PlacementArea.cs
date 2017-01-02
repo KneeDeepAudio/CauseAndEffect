@@ -14,17 +14,15 @@ public class PlacementArea : MonoBehaviour
     public ObjectSpawn[] blockAreas;
 
     private int blockCount = 0;
-    private int[] blocks;
+//    private int[] blocks;
     private SpriteRenderer sprite;
-    private Color col;
     private BoxCollider2D col2D;
 
     // Use this for initialization
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        col = sprite.color;
-        blocks = new int[4];
+//        blocks = new int[4];
         col2D = GetComponent<BoxCollider2D>();
 
         RemoveHighlight();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -30,11 +31,6 @@ public class InputManager : MonoBehaviour
     }
 
     void Start()
-    {
-        placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
-    }
-
-    private void OnLevelWasLoaded()
     {
         placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
     }
@@ -141,4 +137,20 @@ public class InputManager : MonoBehaviour
             area.RemoveHighlight();
         }
     }
+
+    private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        placementAreas = GameObject.FindObjectsOfType<PlacementArea>();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
 }

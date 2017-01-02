@@ -11,7 +11,6 @@ public class Ballista : MonoBehaviour {
 
     private Vector3 arrowPos;
     private SpriteRenderer arrowSprite;
-    private Rigidbody2D body;
     private bool changed;
     private float direction = 1;
 
@@ -19,7 +18,6 @@ public class Ballista : MonoBehaviour {
     void Awake()
     {
         arrowSprite = arrow.GetComponent<SpriteRenderer>();
-        body = GetComponent<Rigidbody2D>();
     }
 
     void OnEnable()

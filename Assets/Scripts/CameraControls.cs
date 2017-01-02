@@ -53,8 +53,6 @@ public class CameraControls : MonoBehaviour
         }
 
         Vector3 targetPos = new Vector3(Mathf.Clamp(target.x, -clampX, clampX), Mathf.Clamp(target.y, clampY * -1, clampY), transform.position.z);
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, panSpeed * Time.deltaTime);
-
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0.0f)
@@ -63,6 +61,7 @@ public class CameraControls : MonoBehaviour
             targetOrtho = Mathf.Clamp(targetOrtho, minOrtho, maxOrtho);
         }
 
+        transform.position = targetPos; // Vector3.MoveTowards(transform.position, targetPos, panSpeed * Time.deltaTime);
         Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, panSpeed * Time.deltaTime);
 
     }

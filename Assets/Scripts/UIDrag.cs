@@ -6,7 +6,6 @@ public class UIDrag : MonoBehaviour {
 
     public GameObject prefab;
 
-    private float offsetX, offsetY;
     private Vector3 startPos;
 
     void Start()
@@ -17,8 +16,6 @@ public class UIDrag : MonoBehaviour {
     public void BeginDrag()
     {
         GameManager.instance.dragging = true;
-        offsetX = transform.position.x - Input.mousePosition.x;
-        offsetY = transform.position.y - Input.mousePosition.y;
 
         if(prefab.tag == "Object")  
         {
