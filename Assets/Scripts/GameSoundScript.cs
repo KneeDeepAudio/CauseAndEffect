@@ -23,18 +23,6 @@ public class GameSoundScript : MonoBehaviour {
         playTitleTrack();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public void OnLevelWasLoaded ( int level )
-        {
-
-        if (SceneManager.GetActiveScene().buildIndex > 2)
-            Destroy(gameObject);//playInGameTrack();
-
-        }
 
     public void playTitleTrack ()
         {
@@ -60,4 +48,20 @@ public class GameSoundScript : MonoBehaviour {
         sfxAudioSource.Play();
         }
 
+    private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneManager.GetActiveScene().buildIndex > 2)
+            Destroy(gameObject);//playInGameTrack();
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+}

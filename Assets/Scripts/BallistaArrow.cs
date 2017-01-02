@@ -8,9 +8,8 @@ public class BallistaArrow : MonoBehaviour
     public GameObject rayOrigin;
 
     private Rigidbody2D body;
-    private LayerMask bounce;
     private Ray2D b;
-    private Vector2 nextDirection;
+//    private Vector2 nextDirection;
     private SpriteRenderer sprite;
     private PolygonCollider2D col;
     private Vector3 startPosition;
@@ -27,7 +26,6 @@ public class BallistaArrow : MonoBehaviour
 
     void Start()
     {
-        bounce = LayerMask.NameToLayer("Default");
         startPosition = transform.position;
         startRotation = transform.rotation;
 
@@ -70,7 +68,7 @@ public class BallistaArrow : MonoBehaviour
 
         if (Deflect(a, out b, hit))
         {
-            nextDirection = new Vector2(b.direction.x, b.direction.y);
+            //nextDirection = new Vector2(b.direction.x, b.direction.y);
         }
     }
 

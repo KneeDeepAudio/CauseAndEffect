@@ -40,13 +40,11 @@ public class Menu : MonoBehaviour
 
 
     // The following code sets closed Menus non-interactable and to not block raycasts. 
-    // It is currently disabled due to the need to have buttons on closed menus active at all time. 
 
-    /*
         void Update()
         {
             // If the state not open, make menu not interactable / block raycasts 
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Open"))
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("IsOpen"))
             {
                 canvasGroup.blocksRaycasts = canvasGroup.interactable = false;
             }
@@ -56,5 +54,5 @@ public class Menu : MonoBehaviour
                 canvasGroup.blocksRaycasts = canvasGroup.interactable = true;
             }
         }
-    */
+
 }

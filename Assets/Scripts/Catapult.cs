@@ -4,8 +4,8 @@ using System.Collections;
 public class Catapult : MonoBehaviour {
 
     public CatapultBall catapultBall;
-    public SpriteRenderer catapultImage;
-    public Sprite[] catapultAnimation = new Sprite[3];
+    //public SpriteRenderer catapultImage;
+    //public Sprite[] catapultAnimation = new Sprite[3];
     public Vector2 ballForce;
     public bool hasFired = false;
     int direction = 1; //1 = facing right, -1 = facing left
@@ -18,19 +18,14 @@ public class Catapult : MonoBehaviour {
     void Awake()
     {
         source = GetComponent<AudioSource>();
+        //catapultImage = GetComponent<SpriteRenderer>();
     }
 
     void OnEnable()
     {
-        try
-        {
-            while (catapultImage.sprite != catapultAnimation[0])
-                catapultImage.sprite = catapultAnimation[0];
-        }
-        catch (System.Exception e)
-        {
 
-        }
+        //if (catapultImage.sprite != catapultAnimation[0])
+        //    catapultImage.sprite = catapultAnimation[0];
 
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
@@ -51,7 +46,7 @@ public class Catapult : MonoBehaviour {
     {
         for (int i = 0 ; i < 3 ; ++i)
         {
-            catapultImage.sprite = catapultAnimation[i];
+            //catapultImage.sprite = catapultAnimation[i];
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -87,15 +82,8 @@ public class Catapult : MonoBehaviour {
 
     public void GameReset()
     {
-        try
-            {
-
-            while (catapultImage.sprite != catapultAnimation[0])
-                catapultImage.sprite = catapultAnimation[0];
-            }
-        catch (System.Exception e)
-            {
-            }
+        //if (catapultImage.sprite != catapultAnimation[0])
+        //    catapultImage.sprite = catapultAnimation[0];
     }
 
     void OnDisable()

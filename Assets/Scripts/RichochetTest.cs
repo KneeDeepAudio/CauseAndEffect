@@ -8,9 +8,8 @@ public class RichochetTest : MonoBehaviour {
     public GameObject rayOrigin;
 
     private Rigidbody2D body;
-    private LayerMask bounce;
     private Ray2D b;
-    private Vector2 nextDirection;
+
     private SpriteRenderer sprite;
     private PolygonCollider2D col;
 
@@ -23,7 +22,6 @@ public class RichochetTest : MonoBehaviour {
     
     void Start()
     {
-        bounce = LayerMask.NameToLayer("Default");
         TurnOn();
     }
     
@@ -64,7 +62,7 @@ public class RichochetTest : MonoBehaviour {
         
         if (Deflect(a, out b, hit))
         {
-            nextDirection = new Vector2(b.direction.x, b.direction.y);
+//            nextDirection = new Vector2(b.direction.x, b.direction.y);
         }
         
     }
