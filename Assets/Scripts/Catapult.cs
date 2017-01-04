@@ -39,7 +39,7 @@ public class Catapult : MonoBehaviour {
 
     void OnMouseUp()
     {
-        if (Time.time - clickTime < 0.35)
+        if (Time.time - clickTime < 0.35 && !GameManager.instance.inPlay)
         {
             Flip();
         }

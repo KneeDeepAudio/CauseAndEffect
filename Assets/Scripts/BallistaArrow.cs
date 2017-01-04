@@ -23,11 +23,9 @@ public class BallistaArrow : MonoBehaviour
         col = GetComponent<PolygonCollider2D>();
     }
 
-
     void Start()
     {
-        startPosition = transform.position;
-        startRotation = transform.rotation;
+
     }
 
     /*
@@ -109,6 +107,18 @@ public class BallistaArrow : MonoBehaviour
         NextDirection();
     }
 
+    public void Flip()
+    {
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+    }
+
+    public void GameLaunch()
+    {
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+    }
+
     public void GameReset()
     {
         TurnOff();
@@ -116,11 +126,13 @@ public class BallistaArrow : MonoBehaviour
 
     void OnEnable()
     {
+        GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
     }
 
     void OnDisable()
     {
+        GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
     }
 }
