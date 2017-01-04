@@ -171,11 +171,13 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
+        GameEventManager.GameLaunch += HideHighlights;
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
     }
 
     private void OnDisable()
     {
+        GameEventManager.GameLaunch -= HideHighlights;
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
 
