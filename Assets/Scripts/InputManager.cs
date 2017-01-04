@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class InputManager : MonoBehaviour
 {
     public static InputManager instance = null;
-
     public GameObject currentObject;
-    private PlacementArea[] placementAreas;
 
+    private PlacementArea[] placementAreas;
+    private float pressTime;
 
     void Awake()
     {
@@ -39,18 +39,30 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            PlaceObject();
+            pressTime = Time.time;
+
+            // First Shoot a ray
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            // If nothing is hit, stop doing things
+            if (!hit)
+                return;
+
+            if (hit.collider.tag == "ObjectPlacement")
+                PlaceObject(hit);
         }
-        if (Input.GetButtonDown("Fire2"))
-            FlipObject();
+        //if (Input.GetButtonDown("Fire2"))
+        //    FlipObject();
 
         if (Input.GetKeyDown(KeyCode.Escape))
             //Pause();
             ;
     }
 
-    public void PlaceObject()
+    public void PlaceObject(RaycastHit2D hit)
     {
+        /*
         // First Shoot a ray
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
@@ -67,7 +79,7 @@ public class InputManager : MonoBehaviour
                 return;
         }
 
-                // Check if player is placing object in the right area
+        // Check if player is placing object in the right area
         if (hit.collider.tag == "ObjectPlacement")
         {
             //Grab area
@@ -75,22 +87,36 @@ public class InputManager : MonoBehaviour
             areaPlaced.PlaceObject(currentObject);
             areaPlaced.RemoveHighlight();
         }
+        */
+
+        //Grab area
+        ObjectSpawn areaPlaced = hit.collider.gameObject.GetComponent<ObjectSpawn>();
+        areaPlaced.PlaceObject(currentObject);
+        areaPlaced.RemoveHighlight();
 
     }
 
-    void FlipObject()
+    //void FlipObject(RaycastHit2D hit)
+    //{
+    //    //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    //RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+    //    //if (!hit)
+    //    //    return;
+
+    //    //if (hit.collider.tag == "Object")
+    //    //{
+    //    //    PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+    //    //    placedObject.ObjectFlip();
+    //    //}
+
+    //    PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
+    //    placedObject.ObjectFlip();
+    //}
+
+    void DragObject(RaycastHit2D hit)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-
-        if (!hit)
-            return;
-
-        if (hit.collider.tag == "Object")
-        {
-            PlaceableObject placedObject = hit.collider.gameObject.GetComponent<PlaceableObject>();
-            placedObject.ObjectFlip();
-        }
+        SpriteDrag dragObject = hit.collider.gameObject.GetComponent<SpriteDrag>();
     }
 
     void RemoveObject()

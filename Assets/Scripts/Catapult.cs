@@ -14,6 +14,7 @@ public class Catapult : MonoBehaviour {
     //public Transform ballLocation;
     //private Vector3 ballPosition;
     private AudioSource source;
+    private float clickTime;
 
     void Awake()
     {
@@ -29,6 +30,19 @@ public class Catapult : MonoBehaviour {
 
         GameEventManager.GameLaunch += GameLaunch;
         GameEventManager.GameReset += GameReset;
+    }
+
+    void OnMouseDown()
+    {
+        clickTime = Time.time;
+    }
+
+    void OnMouseUp()
+    {
+        if (Time.time - clickTime < 0.35)
+        {
+            Flip();
+        }
     }
 
     public void LaunchBall()
@@ -91,5 +105,7 @@ public class Catapult : MonoBehaviour {
         GameEventManager.GameLaunch -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
     }
+
+
 
 }
