@@ -28,7 +28,6 @@ public class BallistaArrow : MonoBehaviour
     {
         startPosition = transform.position;
         startRotation = transform.rotation;
-
     }
 
     /*

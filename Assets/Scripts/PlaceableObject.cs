@@ -8,26 +8,40 @@ public class PlaceableObject : MonoBehaviour
 
     public ObjectSpawn spawnArea;
 
-    private bool changed;
-    private float direction;
-    private Catapult catapult;
-    private Ballista ballista;
+    //private bool changed;
+    //private float direction;
+    //private Catapult catapult;
+    //private Ballista ballista;
+    //private float clickTime;
 
-    void Awake()
-    {
-        catapult = GetComponent<Catapult>();
-        ballista = GetComponent<Ballista>();
-    }
+    //void Awake()
+    //{
+    //    catapult = GetComponent<Catapult>();
+    //    ballista = GetComponent<Ballista>();
+    //}
 
-    public void ObjectFlip()
-    {
-        if (catapult != null)
-        {
-            catapult.Flip();
-        }
-        else if(ballista != null)
-        {
-            ballista.Flip();
-        }
-    }
+    //void OnMouseDown()
+    //{
+    //    clickTime = Time.time;
+    //}
+
+    //void OnMouseUp()
+    //{
+    //    if(Time.time - clickTime < 0.35)
+    //    {
+    //        ObjectFlip();
+    //    }
+    //}
+
+    //public void ObjectFlip()
+    //{
+    //    if (catapult != null)
+    //    {
+    //        catapult.Flip();
+    //    }
+    //    else if(ballista != null)
+    //    {
+    //        ballista.Flip();
+    //    }
+    //}
 }
