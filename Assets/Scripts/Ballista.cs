@@ -14,6 +14,7 @@ public class Ballista : MonoBehaviour {
     private bool changed;
     private float direction = 1;
 
+    private float clickTime;
 
     void Awake()
     {
@@ -30,6 +31,19 @@ public class Ballista : MonoBehaviour {
     {
         GameEventManager.GameReset -= GameLaunch;
         GameEventManager.GameReset -= GameReset;
+    }
+
+    void OnMouseDown()
+    {
+        clickTime = Time.time;
+    }
+
+    void OnMouseUp()
+    {
+        if (Time.time - clickTime < 0.35)
+        {
+            Flip();
+        }
     }
 
     public void FireArrow()

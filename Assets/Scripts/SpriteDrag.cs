@@ -3,22 +3,24 @@
 public class SpriteDrag : MonoBehaviour
 {
     public LayerMask layer;
+
+    [HideInInspector]
+    public bool is_beingDragged = false;
+
     private Vector3 startLocalPos;
     private ObjectSpawn spawnArea;
-    private bool mouseDown = false;
     private Vector3 startMousePos;
     private Vector3 startPos;
     private float offsetX, offsetY;
 
     void Update()
     {
-        if (mouseDown)
+        if (is_beingDragged)
         {
             Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(target.x + offsetX, target.y + offsetY, 0f);
         }
     }
-
 
     public void OnMouseDown()
     {
@@ -31,8 +33,11 @@ public class SpriteDrag : MonoBehaviour
         startLocalPos = transform.localPosition;
         spawnArea = gameObject.GetComponent<PlaceableObject>().spawnArea;
         SetLayerRecursively(LayerMask.NameToLayer("IgnoreCollision"));
+    }
 
-        mouseDown = true;
+    public void OnMouseDrag()
+    { 
+        is_beingDragged = true;
         spawnArea.full = false;
 
         if (gameObject.tag == "Object")
@@ -48,7 +53,7 @@ public class SpriteDrag : MonoBehaviour
     public void OnMouseUp()
     {
         
-        mouseDown = false;
+        is_beingDragged = false;
         SetLayerRecursively(LayerMask.NameToLayer("Object"));
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -81,7 +86,6 @@ public class SpriteDrag : MonoBehaviour
             ObjectSpawn areaPlaced = placedObject.spawnArea;
             areaPlaced.RemoveObject();
         }
-
 
         InputManager.instance.HideHighlights();
         GameManager.instance.dragging = false;
