@@ -58,7 +58,7 @@ public class BallistaArrow : MonoBehaviour
         return false;
     }
 
-    void NextDirection()
+    public void NextDirection()
     {
         Ray2D a = new Ray2D(rayOrigin.transform.position, rayOrigin.transform.right);
         RaycastHit2D hit = Physics2D.Raycast(rayOrigin.transform.position, rayOrigin.transform.right, 10f, 1);
