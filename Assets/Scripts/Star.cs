@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Star : MonoBehaviour {
 
+    [Range(1,2)]
+    public int starIndex;
 
     void OnEnable()
     {
