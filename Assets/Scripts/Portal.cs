@@ -25,5 +25,4 @@ public class Portal : MonoBehaviour {
             bolt.NextDirection();
         }
     }
-
 }
