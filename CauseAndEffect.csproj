@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\PinchZoom.cs" />
     <Compile Include="Assets\Scripts\PlaceableObject.cs" />
     <Compile Include="Assets\Scripts\PlacementArea.cs" />
+    <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\Scripts\RichochetTest.cs" />
     <Compile Include="Assets\Scripts\ScrollRectSnap.cs" />
     <Compile Include="Assets\Scripts\SoundScript.cs" />
