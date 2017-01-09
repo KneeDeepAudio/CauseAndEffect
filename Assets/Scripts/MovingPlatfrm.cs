@@ -24,20 +24,29 @@ public class MovingPlatfrm : MonoBehaviour
 	private bool forward = true;
     private bool reachedEnd = false;
 
+    private LineRenderer lines;
+    public Vector3[] pos;
+
+    void Awake()
+    {
+        lines = GetComponent<LineRenderer>();
+        rb = platform.GetComponent<Rigidbody2D>();
+    }
+
 	void Start()
 	{
+        SetLines();
+
         ///Set Initial position and rotation for reseting
         platform.position = positions[0].transform.position;
         //initialPosition = platform.transform.position;
         //initialRotation = platform.transform.rotation;
-
-        rb = platform.GetComponent<Rigidbody2D> ();
        
         destination = 1;
 		SetDestination (destination);
-	}
+    }
 
-	void Update ()
+    void Update ()
 	{
 
         //if (!GameManager.instance.inPlay)
@@ -78,6 +87,24 @@ public class MovingPlatfrm : MonoBehaviour
                 }
             }
         }
+    }
+
+    void SetLines()
+    {
+        pos = new Vector3[positions.Length + 1]; 
+        for(int i = 0; i < positions.Length; i++)
+        {
+            pos[i] = positions[i].localPosition;
+        }
+        pos[positions.Length] = pos[0];
+
+        if (numberOfPlatforms < 4)
+            lines.numPositions = numberOfPlatforms;
+        else
+            lines.numPositions = numberOfPlatforms + 1;
+
+        lines.SetPositions(pos);
+        //lines.SetPosition(positions.Length, positions[0].localPosition);
     }
 
 	void OnDrawGizmos ()
