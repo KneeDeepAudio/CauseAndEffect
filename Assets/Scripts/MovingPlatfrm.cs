@@ -3,29 +3,36 @@ using System.Collections;
 
 public class MovingPlatfrm : MonoBehaviour 
 {
+    [Tooltip("Select the amount of positions the platform will move between")]
     [Range(2,4)]
     public int numberOfPlatforms;
-
-    public Transform platform;
-	public Transform[] positions;
 	public float  platformSpeed;
 
-    [Range(0.0f, 1.0f)]
-	public float gizmoSize = 0.15f;
-	public bool looping;
+    [Tooltip("If true, platform will continue after reaching final position")]
     public bool continuous;
+    [Tooltip("if true and, platform will move from final position to first, if continuing")]
+    public bool looping;
+    [Tooltip("If true, platform will wait until trigger is hit to move")]
+    public bool isTriggered;
+
+    public Transform platform;
+    public Transform[] positions;
+    public Transform trigger;
+
+    [Range(0.0f, 1.0f)]
+    public float gizmoSize = 0.15f;
 
     //Vector3 initialPosition;
     //Quaternion initialRotation;
 
-	private Rigidbody2D rb;
+    private Rigidbody2D rb;
 	private Vector3 nextPosition;
 	private int destination;
 	private bool forward = true;
     private bool reachedEnd = false;
 
     private LineRenderer lines;
-    public Vector3[] pos;
+    private Vector3[] pos;
 
     void Awake()
     {
@@ -44,13 +51,14 @@ public class MovingPlatfrm : MonoBehaviour
        
         destination = 1;
 		SetDestination (destination);
+        HideTrigger();
     }
 
     void Update ()
 	{
 
-        //if (!GameManager.instance.inPlay)
-        //    return;
+        if (isTriggered)
+            return;
 
         if (!continuous && reachedEnd)
         {
@@ -126,6 +134,12 @@ public class MovingPlatfrm : MonoBehaviour
 	{
 	    nextPosition = (positions[dest].position - platform.position).normalized; 
 	}
+
+    void HideTrigger()
+    {
+        if (!isTriggered)
+            trigger.gameObject.SetActive(false);
+    }
 
     //void GameReset ()
     //{
