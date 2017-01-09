@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Sphere : MonoBehaviour {
 
@@ -29,17 +27,11 @@ public class Sphere : MonoBehaviour {
 
     void OnEnable()
     {
-    //GameEventManager.GameLaunch += GameLaunch;
-
-    Debug.Log("Calling Enabledelegate");
-    GameEventManager.GameReset += GameReset;
+        GameEventManager.GameReset += GameReset;
     }
 
     void OnDisable()
     {
-    // GameEventManager.GameLaunch -= GameLaunch;
-
-    Debug.Log("Calling disabledelegate");
-    GameEventManager.GameReset -= GameReset;
+        GameEventManager.GameReset -= GameReset;
     }
 }
