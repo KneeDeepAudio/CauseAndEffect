@@ -26,16 +26,6 @@ public class FlammableObject : MonoBehaviour
         is_OnFire = onFire;
     }
 
-    IEnumerator StartDestroy()
-    {
-        GameObject dumpPoint = GameObject.FindGameObjectWithTag("Bucket");
-        yield return new WaitForSeconds(secondsToDestroy);
-        if (dumpPoint != null)
-            transform.position = dumpPoint.transform.position;
-        else
-            Debug.Log("Error: No Bucket Found");
-    }
-
     void GameReset()
     {
         RemoveFire();
@@ -60,7 +50,23 @@ public class FlammableObject : MonoBehaviour
 
         if(otherFlammable != null)
         {
-            if (otherFlammable.onFire)
+            if (otherFlammable.onFire && flammable && !onFire)
+            {
+                onFire = true;
+                StartFire(other);
+                if (destroyable)
+                    StartCoroutine(StartDestroy());
+            }
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        FlammableObject otherFlammable = other.gameObject.GetComponent<FlammableObject>();
+
+        if (otherFlammable != null)
+        {
+            if (otherFlammable.onFire && flammable && !onFire)
             {
                 onFire = true;
                 StartFire(other);
@@ -75,8 +81,8 @@ public class FlammableObject : MonoBehaviour
         ContactPoint2D contact = col.contacts[0];
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 pos = contact.point;
-        ParticleSystem fire = Instantiate(flames, pos, Quaternion.identity);
-        fire.transform.parent = col.gameObject.transform;
+        ParticleSystem fire = Instantiate(flames, transform.position, Quaternion.identity);
+        fire.transform.parent = gameObject.transform;
 
         ParticleSystemDestroyer fireDestroyer = fire.GetComponent<ParticleSystemDestroyer>();
         if (fireDestroyer != null)
@@ -91,5 +97,15 @@ public class FlammableObject : MonoBehaviour
             {
                 Destroy(child.gameObject);
             }
+    }
+
+    IEnumerator StartDestroy()
+    {
+        GameObject dumpPoint = GameObject.FindGameObjectWithTag("Bucket");
+        yield return new WaitForSeconds(secondsToDestroy);
+        if (dumpPoint != null)
+            transform.position = dumpPoint.transform.position;
+        else
+            Debug.Log("Error: No Bucket Found");
     }
 }

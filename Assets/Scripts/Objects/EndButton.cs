@@ -16,11 +16,10 @@ public class EndButton : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        amountHit++;
-
-        if(amountHit == timesHit)
+        if(collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall" || collider.gameObject.tag == "Bolt")
         {
-            if (collider.gameObject.tag == "Block" || collider.gameObject.tag == "CatapultBall" || collider.gameObject.tag == "Bolt")
+            amountHit++;
+            if (amountHit == timesHit)
             {
                 hitSound.Play();
                 GameEventManager.TriggerLevelComplete();
