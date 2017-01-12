@@ -9,32 +9,32 @@ public class StartingBlock : MonoBehaviour {
     public Rigidbody2D rBody;
 
     private float directionModifier;
-    private Vector3 startPosition;
-    private Quaternion startRotation;
+    //private Vector3 startPosition;
+    //private Quaternion startRotation;
 
     void Awake()
     {
         rBody = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
-    {
-        startRotation = transform.rotation;
-        startPosition = transform.position;
-    }
+    //void Start()
+    //{
+    //    startRotation = transform.rotation;
+    //    startPosition = transform.position;
+    //}
 
-    void GameReset()
-    {
-        rBody.velocity = Vector2.zero;
-        rBody.angularVelocity = 0f;
-        transform.rotation = startRotation;
-        transform.position = startPosition;
-    }
+    //void GameReset()
+    //{
+    //    rBody.velocity = Vector2.zero;
+    //    rBody.angularVelocity = 0f;
+    //    transform.rotation = startRotation;
+    //    transform.position = startPosition;
+    //}
 
     void GameLaunch()
     {
         if (startRight == true)
-        {
+        { 
             directionModifier = -1;
         }
         else
@@ -47,13 +47,13 @@ public class StartingBlock : MonoBehaviour {
     void OnEnable()
     {
         GameEventManager.GameLaunch += GameLaunch;
-        GameEventManager.GameReset += GameReset;
+        //GameEventManager.GameReset += GameReset;
     }
 
     void OnDisable()
     {
         GameEventManager.GameLaunch -= GameLaunch;
-        GameEventManager.GameReset -= GameReset;
+        //GameEventManager.GameReset -= GameReset;
     }
 
     public void AddTorque(float torque, ForceMode2D mode = ForceMode2D.Force) { }

@@ -33,7 +33,7 @@ public class MovingPlatfrm : MonoBehaviour
 
     private LineRenderer lines;
     private Vector3[] pos;
-
+    
     void Awake()
     {
         lines = GetComponent<LineRenderer>();

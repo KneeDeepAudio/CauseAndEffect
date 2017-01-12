@@ -28,7 +28,7 @@ public class FlammableObject : MonoBehaviour
 
     void GameReset()
     {
-        RemoveFire();
+        //RemoveFire();
         StopAllCoroutines();
         flammable = is_flammable;
         onFire = is_OnFire;
@@ -89,15 +89,15 @@ public class FlammableObject : MonoBehaviour
             fireDestroyer.maxDuration = secondsToDestroy;
     }
 
-    void RemoveFire()
-    {
-        Transform[] children = GetComponentsInChildren<Transform>();
-        foreach (Transform child in children)
-            if (child.CompareTag("Fire"))
-            {
-                Destroy(child.gameObject);
-            }
-    }
+    //void RemoveFire()
+    //{
+    //    Transform[] children = GetComponentsInChildren<Transform>();
+    //    foreach (Transform child in children)
+    //        if (child.CompareTag("Fire"))
+    //        {
+    //            Destroy(child.gameObject);
+    //        }
+    //}
 
     IEnumerator StartDestroy()
     {
