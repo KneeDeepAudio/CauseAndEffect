@@ -58,5 +58,15 @@ namespace UnityStandardAssets.Utility
             // stops the particle system early
             m_EarlyStop = true;
         }
+
+        public void OnEnable()
+        {
+            GameEventManager.GameReset += Stop;
+        }
+
+        public void OnDisable()
+        {
+            GameEventManager.GameReset -= Stop;
+        }
     }
 }

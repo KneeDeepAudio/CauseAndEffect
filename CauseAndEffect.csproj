@@ -84,7 +84,6 @@
     <Compile Include="Assets\Scripts\Camera\CameraControls.cs" />
     <Compile Include="Assets\Scripts\Camera\TouchCamera.cs" />
     <Compile Include="Assets\Scripts\Managers\ChangeScene.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameEventManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameSoundScript.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
@@ -99,6 +98,7 @@
     <Compile Include="Assets\Scripts\Objects\EndButton.cs" />
     <Compile Include="Assets\Scripts\Objects\FlammableObject.cs" />
     <Compile Include="Assets\Scripts\Objects\Hinged.cs" />
+    <Compile Include="Assets\Scripts\Objects\ObjectResetter2D.cs" />
     <Compile Include="Assets\Scripts\Objects\ObjectSpawn.cs" />
     <Compile Include="Assets\Scripts\Objects\PlaceableObject.cs" />
     <Compile Include="Assets\Scripts\Objects\Portal.cs" />
