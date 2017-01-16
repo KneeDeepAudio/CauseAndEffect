@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A51B91E1-29B7-161A-BAD0-1AF90C40AD3A}</ProjectGuid>
+    <ProjectGuid>{3D4FA125-61FC-6E1E-7EF1-BAFE93A20720}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.0f3</UnityVersion>
     <RootNamespace></RootNamespace>
@@ -75,56 +75,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="CauseAndEffect.CSharp.Plugins.csproj">
-      <Project>{3D4FA125-61FC-6E1E-7EF1-BAFE93A20720}</Project>
-      <Name>CauseAndEffect.CSharp.Plugins</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assets\Scripts\Camera\CameraControls.cs" />
-    <Compile Include="Assets\Scripts\Camera\TouchCamera.cs" />
-    <Compile Include="Assets\Scripts\Managers\ChangeScene.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameEventManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameSoundScript.cs" />
-    <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\SoundScript.cs" />
-    <Compile Include="Assets\Scripts\Objects\Ballista.cs" />
-    <Compile Include="Assets\Scripts\Objects\BallistaArrow.cs" />
-    <Compile Include="Assets\Scripts\Objects\BallistaTrigger.cs" />
-    <Compile Include="Assets\Scripts\Objects\Block.cs" />
-    <Compile Include="Assets\Scripts\Objects\Catapult.cs" />
-    <Compile Include="Assets\Scripts\Objects\CatapultBall.cs" />
-    <Compile Include="Assets\Scripts\Objects\CatapultTrigger.cs" />
-    <Compile Include="Assets\Scripts\Objects\EndButton.cs" />
-    <Compile Include="Assets\Scripts\Objects\FlammableObject.cs" />
-    <Compile Include="Assets\Scripts\Objects\Hinged.cs" />
-    <Compile Include="Assets\Scripts\Objects\ObjectSpawn.cs" />
-    <Compile Include="Assets\Scripts\Objects\PlaceableObject.cs" />
-    <Compile Include="Assets\Scripts\Objects\Portal.cs" />
-    <Compile Include="Assets\Scripts\Objects\Sphere.cs" />
-    <Compile Include="Assets\Scripts\Objects\SpriteDrag.cs" />
-    <Compile Include="Assets\Scripts\Objects\Star.cs" />
-    <Compile Include="Assets\Scripts\Objects\StartingBlock.cs" />
-    <Compile Include="Assets\Scripts\Objects\Trampoline.cs" />
-    <Compile Include="Assets\Scripts\Platforms\Ice.cs" />
-    <Compile Include="Assets\Scripts\Platforms\LavaPlatform.cs" />
-    <Compile Include="Assets\Scripts\Platforms\MovingPlatfrm.cs" />
-    <Compile Include="Assets\Scripts\Platforms\PlacementArea.cs" />
-    <Compile Include="Assets\Scripts\Platforms\PlatformTrigger.cs" />
-    <Compile Include="Assets\Scripts\Test\BlockNew.cs" />
-    <Compile Include="Assets\Scripts\Test\BlockSpawn.cs" />
-    <Compile Include="Assets\Scripts\Test\DragMe.cs" />
-    <Compile Include="Assets\Scripts\Test\DragPanel.cs" />
-    <Compile Include="Assets\Scripts\Test\DropMe.cs" />
-    <Compile Include="Assets\Scripts\UI\LevelSelectUI.cs" />
-    <Compile Include="Assets\Scripts\UI\Menu.cs" />
-    <Compile Include="Assets\Scripts\UI\MenuManager.cs" />
-    <Compile Include="Assets\Scripts\UI\PinchZoom.cs" />
-    <Compile Include="Assets\Scripts\UI\RichochetTest.cs" />
-    <Compile Include="Assets\Scripts\UI\ScrollRectSnap.cs" />
-    <Compile Include="Assets\Scripts\UI\UIDrag.cs" />
-    <Compile Include="Assets\Scripts\UI\UIManager.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
+    <Compile Include="Assets\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ExplosionFireAndDebris.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\Explosive.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ExtinguishableParticleSystem.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\FireLight.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\Hose.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\SmokeParticles.cs" />
+    <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\ActivateTrigger.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\AlphaButtonClickMask.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\AutoMoveAndRotate.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\CameraRefocus.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\CurveControlledBob.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\DragRigidbody.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\DynamicShadowSettings.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\EventSystemChecker.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\FOVKick.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\FPSCounter.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\FollowTarget.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\ForcedReset.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\LerpControlledBob.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\ObjectResetter.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\PlatformSpecificContent.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\SimpleMouseRotator.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\SmoothFollow.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\TimedObjectActivator.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\TimedObjectDestructor.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\WaypointCircuit.cs" />
+    <Compile Include="Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
