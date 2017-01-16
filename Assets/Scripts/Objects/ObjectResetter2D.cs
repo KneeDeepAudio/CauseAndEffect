@@ -28,13 +28,13 @@ public class ObjectResetter2D : MonoBehaviour {
     void ResetObject()
     {
         // remove any gameobjects added (fire, skid trails, etc)
-        foreach (Transform t in GetComponentsInChildren<Transform>())
-        {
-            if (!originalStructure.Contains(t))
-            {
-                t.parent = null;
-            }
-        }
+        //foreach (Transform t in GetComponentsInChildren<Transform>())
+        //{
+        //    if (!originalStructure.Contains(t))
+        //    {
+        //        t.parent = null;
+        //    }
+        //}
 
         if (Rigidbody)
         {
