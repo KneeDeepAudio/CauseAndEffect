@@ -30,6 +30,7 @@ public class MovingPlatfrm : MonoBehaviour
 	private int destination;
 	private bool forward = true;
     private bool reachedEnd = false;
+    private bool is_triggered;
 
     private LineRenderer lines;
     private Vector3[] pos;
@@ -52,6 +53,7 @@ public class MovingPlatfrm : MonoBehaviour
         destination = 1;
 		SetDestination (destination);
         HideTrigger();
+        is_triggered = isTriggered;
     }
 
     void Update ()
@@ -141,21 +143,23 @@ public class MovingPlatfrm : MonoBehaviour
             trigger.gameObject.SetActive(false);
     }
 
-    //void GameReset ()
-    //{
-    //    platform.transform.rotation = initialRotation;
-    //    platform.transform.position = initialPosition;
-    //}
+    void GameReset()
+    {
+        isTriggered = is_triggered;
+        platform.position = positions[0].transform.position;
+        destination = 1;
+        SetDestination(destination);
+    }
 
     void OnEnable ()
     {
         //GameEventManager.GameLaunch += GameLaunch;
-        //GameEventManager.GameReset += GameReset;
+        GameEventManager.GameReset += GameReset;
     }
 
     void OnDisable ()
     {
         // GameEventManager.GameLaunch -= GameLaunch;
-        //GameEventManager.GameReset -= GameReset;
+        GameEventManager.GameReset -= GameReset;
     }
 }
