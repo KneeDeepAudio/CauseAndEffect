@@ -21,6 +21,10 @@ public class UIDrag : MonoBehaviour {
         {
             InputManager.instance.ShowHighlights("Object");
         }
+        else if(prefab.tag == "CatapultBall")
+        {
+            InputManager.instance.ShowHighlights("Sphere");
+        }
         else if (prefab.tag == "Block")
         {
             InputManager.instance.ShowHighlights("Block");

@@ -147,6 +147,13 @@ public class InputManager : MonoBehaviour
                 area.HighlightObjectPlacement();
             }
         }
+        else if (tag == "Sphere")
+        {
+            foreach (PlacementArea area in placementAreas)
+            {
+                area.HighlightSpherePlacement();
+            }
+        }
         else if (tag == "Block")
         {
             foreach (PlacementArea area in placementAreas)

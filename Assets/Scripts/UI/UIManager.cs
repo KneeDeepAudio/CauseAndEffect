@@ -98,6 +98,10 @@ public class UIManager : MonoBehaviour {
         {
             InputManager.instance.ShowHighlights("Object");
         }
+        else if(tag == "CatapultBall")
+        {
+            InputManager.instance.ShowHighlights("Sphere");
+        }
         else if (tag == "Block")
         {
             InputManager.instance.ShowHighlights("Block");

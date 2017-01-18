@@ -7,14 +7,14 @@ public class ObjectSpawn : MonoBehaviour {
     public bool full = false;
 
     private SpriteRenderer sprite;
-    private BoxCollider2D col2D;
+    private Collider2D col2D;
 
     private GameObject placedObject;
 
     void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
-        col2D = GetComponent<BoxCollider2D>();
+        col2D = GetComponent<Collider2D>();
     }
 
     public bool IsFull
