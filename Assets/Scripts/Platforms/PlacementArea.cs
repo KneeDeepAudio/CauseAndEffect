@@ -6,12 +6,14 @@ public class PlacementArea : MonoBehaviour
 
     public bool objectPlaced = false;
     public bool blockPlaced = false;
+    public bool spherePlaced = false;
     public bool full = false;
     public float shadeAlpha = 0.35f;
     public int maxBlocks = 4;
 
     public ObjectSpawn objectArea;
     public ObjectSpawn[] blockAreas;
+    public ObjectSpawn[] sphereAreas;
 
     private int blockCount = 0;
 //    private int[] blocks;
@@ -62,6 +64,16 @@ public class PlacementArea : MonoBehaviour
         return false;
     }
 
+    public bool SpherePlaced()
+    {
+        foreach (ObjectSpawn spawnArea in sphereAreas)
+        {
+            if (spawnArea.IsFull)
+                return true;
+        }
+        return false;
+    }
+
     public void PlaceBlock()
     {
         blockCount++;
@@ -72,6 +84,12 @@ public class PlacementArea : MonoBehaviour
     public void PlaceObject()
     {
         objectPlaced = true;
+        CheckFull();
+    }
+
+    public void PlaceSphere()
+    {
+        spherePlaced = true;
         CheckFull();
     }
 
@@ -91,9 +109,15 @@ public class PlacementArea : MonoBehaviour
         CheckFull();
     }
 
+    public void RemoveSphere()
+    {
+        spherePlaced = false;
+        CheckFull();
+    }
+
     public void CheckFull()
     {
-        if (objectPlaced == true || blockCount >= maxBlocks)
+        if (objectPlaced == true || blockCount >= maxBlocks || spherePlaced == true)
         {
             full = true;
             sprite.enabled = false;
@@ -111,8 +135,20 @@ public class PlacementArea : MonoBehaviour
     public void HighlightObjectPlacement()
     {
         RemoveHighlight();
-        if(!BlockPlaced() && !objectArea.IsFull)
+        if(!BlockPlaced() && !objectArea.IsFull && !SpherePlaced())
         objectArea.Highlight();
+    }
+
+    public void HighlightSpherePlacement()
+    {
+        RemoveHighlight();
+        if (!BlockPlaced() && !objectArea.IsFull && !SpherePlaced())
+        {
+            foreach (ObjectSpawn spawnArea in sphereAreas)
+            {
+                spawnArea.Highlight();
+            }
+        }
     }
 
     public void HighlightBlockPlacement()
@@ -120,7 +156,7 @@ public class PlacementArea : MonoBehaviour
         RemoveHighlight();
         foreach (ObjectSpawn spawnArea in blockAreas)
         {
-            if(!spawnArea.IsFull && !objectArea.IsFull)
+            if(!spawnArea.IsFull && !objectArea.IsFull && !SpherePlaced())
                 spawnArea.Highlight();
         }
     }
@@ -129,6 +165,10 @@ public class PlacementArea : MonoBehaviour
     {
         objectArea.RemoveHighlight();
         foreach (ObjectSpawn spawnArea in blockAreas)
+        {
+            spawnArea.RemoveHighlight();
+        }
+        foreach (ObjectSpawn spawnArea in sphereAreas)
         {
             spawnArea.RemoveHighlight();
         }

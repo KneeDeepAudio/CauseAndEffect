@@ -44,6 +44,10 @@ public class SpriteDrag : MonoBehaviour
         {
             InputManager.instance.ShowHighlights("Object");
         }
+        else if(gameObject.tag == "CatapultBall")
+        {
+            InputManager.instance.ShowHighlights("Sphere");
+        }
         else if (gameObject.tag == "Block")
         {
             InputManager.instance.ShowHighlights("Block");
