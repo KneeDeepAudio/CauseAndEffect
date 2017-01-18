@@ -23,9 +23,9 @@ public class BallistaArrow : MonoBehaviour
         col = GetComponent<PolygonCollider2D>();
     }
 
-    void Start()
+    void Update()
     {
-
+        Debug.DrawRay(rayOrigin.transform.position, rayOrigin.transform.right);
     }
 
     /*
